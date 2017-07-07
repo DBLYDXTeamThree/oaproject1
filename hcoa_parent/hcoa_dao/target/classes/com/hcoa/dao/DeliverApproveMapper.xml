@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcoa.dao.DeliverApproveMapper" >
+  <resultMap id="BaseResultMap" type="com.hcoa.entity.DeliverApprove" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_flow_id" property="projectFlowId" jdbcType="BIGINT" />
+    <result column="public_id" property="publicId" jdbcType="BIGINT" />
+    <result column="approve_project_id" property="approveProjectId" jdbcType="BIGINT" />
+    <result column="deliver_id" property="deliverId" jdbcType="BIGINT" />
+    <result column="delive_message" property="deliveMessage" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="deliver_datetime" property="deliverDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_flow_id, public_id, approve_project_id, deliver_id, delive_message, remark, 
+    deliver_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hcoa.entity.DeliverApproveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deliver_approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from deliver_approve
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from deliver_approve
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hcoa.entity.DeliverApproveExample" >
+    delete from deliver_approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hcoa.entity.DeliverApprove" >
+    insert into deliver_approve (id, project_flow_id, public_id, 
+      approve_project_id, deliver_id, delive_message, 
+      remark, deliver_datetime)
+    values (#{id,jdbcType=BIGINT}, #{projectFlowId,jdbcType=BIGINT}, #{publicId,jdbcType=BIGINT}, 
+      #{approveProjectId,jdbcType=BIGINT}, #{deliverId,jdbcType=BIGINT}, #{deliveMessage,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deliverDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hcoa.entity.DeliverApprove" >
+    insert into deliver_approve
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectFlowId != null" >
+        project_flow_id,
+      </if>
+      <if test="publicId != null" >
+        public_id,
+      </if>
+      <if test="approveProjectId != null" >
+        approve_project_id,
+      </if>
+      <if test="deliverId != null" >
+        deliver_id,
+      </if>
+      <if test="deliveMessage != null" >
+        delive_message,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="deliverDatetime != null" >
+        deliver_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectFlowId != null" >
+        #{projectFlowId,jdbcType=BIGINT},
+      </if>
+      <if test="publicId != null" >
+        #{publicId,jdbcType=BIGINT},
+      </if>
+      <if test="approveProjectId != null" >
+        #{approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="deliverId != null" >
+        #{deliverId,jdbcType=BIGINT},
+      </if>
+      <if test="deliveMessage != null" >
+        #{deliveMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverDatetime != null" >
+        #{deliverDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hcoa.entity.DeliverApproveExample" resultType="java.lang.Integer" >
+    select count(*) from deliver_approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deliver_approve
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.projectFlowId != null" >
+        project_flow_id = #{record.projectFlowId,jdbcType=BIGINT},
+      </if>
+      <if test="record.publicId != null" >
+        public_id = #{record.publicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveProjectId != null" >
+        approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deliverId != null" >
+        deliver_id = #{record.deliverId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deliveMessage != null" >
+        delive_message = #{record.deliveMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverDatetime != null" >
+        deliver_datetime = #{record.deliverDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deliver_approve
+    set id = #{record.id,jdbcType=BIGINT},
+      project_flow_id = #{record.projectFlowId,jdbcType=BIGINT},
+      public_id = #{record.publicId,jdbcType=BIGINT},
+      approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      deliver_id = #{record.deliverId,jdbcType=BIGINT},
+      delive_message = #{record.deliveMessage,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      deliver_datetime = #{record.deliverDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hcoa.entity.DeliverApprove" >
+    update deliver_approve
+    <set >
+      <if test="projectFlowId != null" >
+        project_flow_id = #{projectFlowId,jdbcType=BIGINT},
+      </if>
+      <if test="publicId != null" >
+        public_id = #{publicId,jdbcType=BIGINT},
+      </if>
+      <if test="approveProjectId != null" >
+        approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="deliverId != null" >
+        deliver_id = #{deliverId,jdbcType=BIGINT},
+      </if>
+      <if test="deliveMessage != null" >
+        delive_message = #{deliveMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverDatetime != null" >
+        deliver_datetime = #{deliverDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hcoa.entity.DeliverApprove" >
+    update deliver_approve
+    set project_flow_id = #{projectFlowId,jdbcType=BIGINT},
+      public_id = #{publicId,jdbcType=BIGINT},
+      approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      deliver_id = #{deliverId,jdbcType=BIGINT},
+      delive_message = #{deliveMessage,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      deliver_datetime = #{deliverDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

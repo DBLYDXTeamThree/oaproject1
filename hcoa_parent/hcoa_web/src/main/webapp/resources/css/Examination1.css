@@ -1,0 +1,9 @@
+.table td {text-align: center;}
+.table thead:first-child tr th, .table thead:first-child tr td{ text-align: center; padding-bottom: 12px;line-height: 30px;}
+.input-append{ width: 285px;}
+.breadcrumb{ margin-bottom: 10px;}
+.search{ margin-bottom: 10px;}
+.btn1{background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);border: 1px solid #ccc;}
+.form-horizontal .control-label{ width: 100px;}
+.form-horizontal .controls{margin-left: 120px;}
+.table a{ color:#666666;}

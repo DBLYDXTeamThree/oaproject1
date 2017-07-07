@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcoa.dao.StaffInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hcoa.entity.StaffInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="login_username" property="loginUsername" jdbcType="VARCHAR" />
+    <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="approve_rule_id" property="approveRuleId" jdbcType="BIGINT" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="entrytime" property="entrytime" jdbcType="TIMESTAMP" />
+    <result column="is_display" property="isDisplay" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="telephone_ext" property="telephoneExt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, realname, login_username, login_pwd, cellphone, department_id, role_id, approve_rule_id, 
+    birthday, position, entrytime, is_display, sex, status, telephone, telephone_ext
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hcoa.entity.StaffInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from staff_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hcoa.entity.StaffInfoExample" >
+    delete from staff_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hcoa.entity.StaffInfo" >
+    insert into staff_info (id, realname, login_username, 
+      login_pwd, cellphone, department_id, 
+      role_id, approve_rule_id, birthday, 
+      position, entrytime, is_display, 
+      sex, status, telephone, 
+      telephone_ext)
+    values (#{id,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, #{loginUsername,jdbcType=VARCHAR}, 
+      #{loginPwd,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, 
+      #{roleId,jdbcType=BIGINT}, #{approveRuleId,jdbcType=BIGINT}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{position,jdbcType=VARCHAR}, #{entrytime,jdbcType=TIMESTAMP}, #{isDisplay,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{telephoneExt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hcoa.entity.StaffInfo" >
+    insert into staff_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="loginUsername != null" >
+        login_username,
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="approveRuleId != null" >
+        approve_rule_id,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="entrytime != null" >
+        entrytime,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="telephoneExt != null" >
+        telephone_ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUsername != null" >
+        #{loginUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="approveRuleId != null" >
+        #{approveRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="entrytime != null" >
+        #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneExt != null" >
+        #{telephoneExt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hcoa.entity.StaffInfoExample" resultType="java.lang.Integer" >
+    select count(*) from staff_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update staff_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.realname != null" >
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginUsername != null" >
+        login_username = #{record.loginUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginPwd != null" >
+        login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellphone != null" >
+        cellphone = #{record.cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null" >
+        department_id = #{record.departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveRuleId != null" >
+        approve_rule_id = #{record.approveRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entrytime != null" >
+        entrytime = #{record.entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDisplay != null" >
+        is_display = #{record.isDisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephoneExt != null" >
+        telephone_ext = #{record.telephoneExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update staff_info
+    set id = #{record.id,jdbcType=BIGINT},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      login_username = #{record.loginUsername,jdbcType=VARCHAR},
+      login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      cellphone = #{record.cellphone,jdbcType=VARCHAR},
+      department_id = #{record.departmentId,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=BIGINT},
+      approve_rule_id = #{record.approveRuleId,jdbcType=BIGINT},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      position = #{record.position,jdbcType=VARCHAR},
+      entrytime = #{record.entrytime,jdbcType=TIMESTAMP},
+      is_display = #{record.isDisplay,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      telephone_ext = #{record.telephoneExt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hcoa.entity.StaffInfo" >
+    update staff_info
+    <set >
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginUsername != null" >
+        login_username = #{loginUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="approveRuleId != null" >
+        approve_rule_id = #{approveRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="entrytime != null" >
+        entrytime = #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneExt != null" >
+        telephone_ext = #{telephoneExt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hcoa.entity.StaffInfo" >
+    update staff_info
+    set realname = #{realname,jdbcType=VARCHAR},
+      login_username = #{loginUsername,jdbcType=VARCHAR},
+      login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
+      approve_rule_id = #{approveRuleId,jdbcType=BIGINT},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      position = #{position,jdbcType=VARCHAR},
+      entrytime = #{entrytime,jdbcType=TIMESTAMP},
+      is_display = #{isDisplay,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      telephone_ext = #{telephoneExt,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <resultMap id="ResultWithDeptRole" type="com.hcoa.entity.StaffInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="login_username" property="loginUsername" jdbcType="VARCHAR" />
+    <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="approve_rule_id" property="approveRuleId" jdbcType="BIGINT" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="entrytime" property="entrytime" jdbcType="TIMESTAMP" />
+    <result column="is_display" property="isDisplay" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="telephone_ext" property="telephoneExt" jdbcType="VARCHAR" />
+    
+    <association property="dept" javaType="com.hcoa.entity.Department">
+	    <id column="did" property="id" jdbcType="BIGINT" />
+	    <result column="ddepartment_caption" property="departmentCaption" jdbcType="VARCHAR" />
+	    <result column="dparent_id" property="parentId" jdbcType="BIGINT" />
+	    <result column="dremark" property="remark" jdbcType="VARCHAR" />
+    </association>
+    
+    <association property="role" javaType="com.hcoa.entity.RoleSet">
+	      <id column="rid" property="id" jdbcType="BIGINT" />
+	      <result column="rrole_caption" property="roleCaption" jdbcType="VARCHAR" />
+	      <result column="rremark" property="remark" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <sql id="rootsql">
+  	select a.*,
+  			b.id did,b.department_caption ddepartment_caption,b.parent_id dparent_id,b.remark dremark,
+  			c.id rid,c.role_caption rrole_caption,c.remark rremark 
+  	 from staff_info a
+  		left join department b
+  			on a.department_id = b.id
+  		left join role_set c
+  			on a.role_id = c.id
+  </sql>
+  
+  <select id="selectByUsernameAndPassword" resultMap="ResultWithDeptRole" >
+    	<include refid="rootsql"></include>
+		 where  login_username=#{0} and  login_pwd=#{1}
+  </select>
+  
+  <resultMap type="com.hcoa.entity.StaffInfo" id="checkerInfo">
+   <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+  <association javaType="com.hcoa.entity.Department" property="department">
+   <id column="bid" property="id" jdbcType="BIGINT" />
+    <result column="bdepartment_caption" property="departmentCaption" jdbcType="VARCHAR" />
+  </association>
+  </resultMap>
+  
+  
+  <select id="getCheckInfo" resultMap="checkerInfo">
+      select a.id,a.realname,a.department_id,b.id bid,b.department_caption bdepartment_caption 
+      from staff_info a, department b where a.department_id = b.id
+  </select>
+  
+</mapper>

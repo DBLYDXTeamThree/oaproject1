@@ -1,0 +1,6 @@
+.table td {text-align: center;}
+.table thead:first-child tr th, .table thead:first-child tr td{ text-align: center; padding-bottom: 12px;}
+input[type="text"]{ margin-bottom: 0px; height: 30px;}
+.pagination>li>a, .pagination>li>span{ color: #666;}
+.pagination{ margin-left: 39%;}
+.table thead tr th{color: #333;}

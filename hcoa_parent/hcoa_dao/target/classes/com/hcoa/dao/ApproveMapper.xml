@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcoa.dao.ApproveMapper" >
+  <resultMap id="BaseResultMap" type="com.hcoa.entity.Approve" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="deliver_approve_id" property="deliverApproveId" jdbcType="BIGINT" />
+    <result column="public_id" property="publicId" jdbcType="BIGINT" />
+    <result column="approve_project_id" property="approveProjectId" jdbcType="BIGINT" />
+    <result column="approver_id" property="approverId" jdbcType="BIGINT" />
+    <result column="approve_level" property="approveLevel" jdbcType="BIGINT" />
+    <result column="approve_cycle_time" property="approveCycleTime" jdbcType="BIGINT" />
+    <result column="approve_datetime" property="approveDatetime" jdbcType="TIMESTAMP" />
+    <result column="operation_status" property="operationStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hcoa.entity.Approve" extends="BaseResultMap" >
+    <result column="approve_suggestion" property="approveSuggestion" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, deliver_approve_id, public_id, approve_project_id, approver_id, approve_level, 
+    approve_cycle_time, approve_datetime, operation_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    approve_suggestion
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hcoa.entity.ApproveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hcoa.entity.ApproveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from approve
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from approve
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hcoa.entity.ApproveExample" >
+    delete from approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hcoa.entity.Approve" >
+    insert into approve (id, deliver_approve_id, public_id, 
+      approve_project_id, approver_id, approve_level, 
+      approve_cycle_time, approve_datetime, operation_status, 
+      approve_suggestion)
+    values (#{id,jdbcType=BIGINT}, #{deliverApproveId,jdbcType=BIGINT}, #{publicId,jdbcType=BIGINT}, 
+      #{approveProjectId,jdbcType=BIGINT}, #{approverId,jdbcType=BIGINT}, #{approveLevel,jdbcType=BIGINT}, 
+      #{approveCycleTime,jdbcType=BIGINT}, #{approveDatetime,jdbcType=TIMESTAMP}, #{operationStatus,jdbcType=VARCHAR}, 
+      #{approveSuggestion,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hcoa.entity.Approve" >
+    insert into approve
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deliverApproveId != null" >
+        deliver_approve_id,
+      </if>
+      <if test="publicId != null" >
+        public_id,
+      </if>
+      <if test="approveProjectId != null" >
+        approve_project_id,
+      </if>
+      <if test="approverId != null" >
+        approver_id,
+      </if>
+      <if test="approveLevel != null" >
+        approve_level,
+      </if>
+      <if test="approveCycleTime != null" >
+        approve_cycle_time,
+      </if>
+      <if test="approveDatetime != null" >
+        approve_datetime,
+      </if>
+      <if test="operationStatus != null" >
+        operation_status,
+      </if>
+      <if test="approveSuggestion != null" >
+        approve_suggestion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deliverApproveId != null" >
+        #{deliverApproveId,jdbcType=BIGINT},
+      </if>
+      <if test="publicId != null" >
+        #{publicId,jdbcType=BIGINT},
+      </if>
+      <if test="approveProjectId != null" >
+        #{approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="approverId != null" >
+        #{approverId,jdbcType=BIGINT},
+      </if>
+      <if test="approveLevel != null" >
+        #{approveLevel,jdbcType=BIGINT},
+      </if>
+      <if test="approveCycleTime != null" >
+        #{approveCycleTime,jdbcType=BIGINT},
+      </if>
+      <if test="approveDatetime != null" >
+        #{approveDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationStatus != null" >
+        #{operationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="approveSuggestion != null" >
+        #{approveSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hcoa.entity.ApproveExample" resultType="java.lang.Integer" >
+    select count(*) from approve
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update approve
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.deliverApproveId != null" >
+        deliver_approve_id = #{record.deliverApproveId,jdbcType=BIGINT},
+      </if>
+      <if test="record.publicId != null" >
+        public_id = #{record.publicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveProjectId != null" >
+        approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.approverId != null" >
+        approver_id = #{record.approverId,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveLevel != null" >
+        approve_level = #{record.approveLevel,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveCycleTime != null" >
+        approve_cycle_time = #{record.approveCycleTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveDatetime != null" >
+        approve_datetime = #{record.approveDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operationStatus != null" >
+        operation_status = #{record.operationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveSuggestion != null" >
+        approve_suggestion = #{record.approveSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update approve
+    set id = #{record.id,jdbcType=BIGINT},
+      deliver_approve_id = #{record.deliverApproveId,jdbcType=BIGINT},
+      public_id = #{record.publicId,jdbcType=BIGINT},
+      approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      approver_id = #{record.approverId,jdbcType=BIGINT},
+      approve_level = #{record.approveLevel,jdbcType=BIGINT},
+      approve_cycle_time = #{record.approveCycleTime,jdbcType=BIGINT},
+      approve_datetime = #{record.approveDatetime,jdbcType=TIMESTAMP},
+      operation_status = #{record.operationStatus,jdbcType=VARCHAR},
+      approve_suggestion = #{record.approveSuggestion,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update approve
+    set id = #{record.id,jdbcType=BIGINT},
+      deliver_approve_id = #{record.deliverApproveId,jdbcType=BIGINT},
+      public_id = #{record.publicId,jdbcType=BIGINT},
+      approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      approver_id = #{record.approverId,jdbcType=BIGINT},
+      approve_level = #{record.approveLevel,jdbcType=BIGINT},
+      approve_cycle_time = #{record.approveCycleTime,jdbcType=BIGINT},
+      approve_datetime = #{record.approveDatetime,jdbcType=TIMESTAMP},
+      operation_status = #{record.operationStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hcoa.entity.Approve" >
+    update approve
+    <set >
+      <if test="deliverApproveId != null" >
+        deliver_approve_id = #{deliverApproveId,jdbcType=BIGINT},
+      </if>
+      <if test="publicId != null" >
+        public_id = #{publicId,jdbcType=BIGINT},
+      </if>
+      <if test="approveProjectId != null" >
+        approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="approverId != null" >
+        approver_id = #{approverId,jdbcType=BIGINT},
+      </if>
+      <if test="approveLevel != null" >
+        approve_level = #{approveLevel,jdbcType=BIGINT},
+      </if>
+      <if test="approveCycleTime != null" >
+        approve_cycle_time = #{approveCycleTime,jdbcType=BIGINT},
+      </if>
+      <if test="approveDatetime != null" >
+        approve_datetime = #{approveDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationStatus != null" >
+        operation_status = #{operationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="approveSuggestion != null" >
+        approve_suggestion = #{approveSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hcoa.entity.Approve" >
+    update approve
+    set deliver_approve_id = #{deliverApproveId,jdbcType=BIGINT},
+      public_id = #{publicId,jdbcType=BIGINT},
+      approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      approver_id = #{approverId,jdbcType=BIGINT},
+      approve_level = #{approveLevel,jdbcType=BIGINT},
+      approve_cycle_time = #{approveCycleTime,jdbcType=BIGINT},
+      approve_datetime = #{approveDatetime,jdbcType=TIMESTAMP},
+      operation_status = #{operationStatus,jdbcType=VARCHAR},
+      approve_suggestion = #{approveSuggestion,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hcoa.entity.Approve" >
+    update approve
+    set deliver_approve_id = #{deliverApproveId,jdbcType=BIGINT},
+      public_id = #{publicId,jdbcType=BIGINT},
+      approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      approver_id = #{approverId,jdbcType=BIGINT},
+      approve_level = #{approveLevel,jdbcType=BIGINT},
+      approve_cycle_time = #{approveCycleTime,jdbcType=BIGINT},
+      approve_datetime = #{approveDatetime,jdbcType=TIMESTAMP},
+      operation_status = #{operationStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,54 @@
+﻿@charset "utf-8";
+/*初始化*/
+body,ul,li,p,ol,dl,dt,dd,form,input,h1,h2,h3,h4,h5,h6{ margin:0; padding:0}
+html,body{ height:100%; width:100%;}
+ul{ list-style:none}
+a{ text-decoration:none; color:#fff;}
+*{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+input:focus{ outline:none}
+textarea {resize: none;}
+.fl{ float:left}
+.fr{ float:right}
+.rel{ position:relative}
+.abs{ position:absolute}
+.clear{ clear:both; overflow:hidden; height:0px;}
+/*首页样式*/
+
+/*内容样式*/
+.Content { width:100%;}
+/*头部样式*/
+.Header{ width:100%; background:url(../../images/head_bj.png) no-repeat left top; height:55px; background-color:#3785d4;}
+.Header .Header_Function { float:right; text-align:right; width:100%; margin-top: 10px;}
+.admin{ background:url(../images/Admin.jpg) no-repeat left top;height:55px; display:block; float:left; line-height:55px;width:20%;background-position: 0px;float: right;text-align: left; padding-left:25px; margin-right:10px;color:#FFFFFF;}
+.password{ background:url(../images/Password.jpg) no-repeat left top;height:55px; display:block;float:left;line-height:55px;width:30%;background-position: 0px;float: right;text-align: left; padding-left:25px;margin-right:10px;color:#FFFFFF;}
+.out { background:url(../images/Sign_out.jpg) no-repeat left top;height:55px; display:block;float:left;line-height:55px; width:20%;background-position: 0px;float: right;text-align: left; padding-left:25px;margin-right:10px;color:#FFFFFF;}
+/*导航样式*/
+.navbar-inverse {background: url(../../images/nav_bj.png) repeat-x left top;height: 86px; width:100%; padding-left:15px;}
+.nav>li>a{ padding:0;}
+.dropdown-menu{min-width:0px; top:99%;}
+.dropdown-menu{background-color: #327cdc; opacity:0.8;}
+.dropdown-menu>li>a { color:#fff;background-color: #327cdc; padding: 3px 17px;}
+.dropdown-menu>li>a:hover{ background-color:#061efa;color:#fff;}
+.nav-pills>li+li{ margin-left:0px;}
+.nav-pills > li > a{ margin:0px;}
+.icon-refresh { background:url(../../images/Admin.jpg) no-repeat; width: 20px;height: 20px; }
+.icon-refresh1 { background:url(../../images/Password.jpg) no-repeat;width: 20px;height: 20px;}
+.icon-refresh2 { background:url(../../images/Sign_out.jpg) no-repeat;width: 20px;height: 20px;}
+.btn-link{ color:#FFFFFF;}
+.btn-link:hover{text-decoration:none; color:#fff;}
+/*面包屑导航样式*/
+.breadcrumb a{ color: #555555;} 
+.breadcrumb .active{color: #555555;}
+/*表单样式*/
+.form-horizontal .control-label{ margin-top: 0; padding-top: 0px;}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{ height: 25px; line-height: 25px;}
+.form-horizontal .checkbox-inline{ padding-top: 0;}
+input[type="radio"], input[type="checkbox"] {
+margin: -2px 0 0;
+margin-top: 1px \9;
+line-height: normal;
+}
+.radio-inline, .checkbox-inline{ padding-left: 0px;}
+/*尾部样式*/
+.Footer { width:100%; height:40px; background:url(../../images/footer_bj.jpg) repeat-x bottom; line-height:40px;}
+.Footer p { text-align:center; color:#fff; line-height:40px;}

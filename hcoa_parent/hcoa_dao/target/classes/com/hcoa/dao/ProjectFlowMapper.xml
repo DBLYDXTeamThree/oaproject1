@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcoa.dao.ProjectFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.hcoa.entity.ProjectFlow" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="flow_node_id" property="flowNodeId" jdbcType="BIGINT" />
+    <result column="approve_project_id" property="approveProjectId" jdbcType="BIGINT" />
+    <result column="node_status" property="nodeStatus" jdbcType="VARCHAR" />
+    <result column="current_approve_level" property="currentApproveLevel" jdbcType="INTEGER" />
+    <result column="current_cycle_time" property="currentCycleTime" jdbcType="INTEGER" />
+    <result column="public_id" property="publicId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, flow_node_id, approve_project_id, node_status, current_approve_level, current_cycle_time, 
+    public_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hcoa.entity.ProjectFlowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from project_flow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from project_flow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hcoa.entity.ProjectFlowExample" >
+    delete from project_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hcoa.entity.ProjectFlow" >
+    insert into project_flow (id, flow_node_id, approve_project_id, 
+      node_status, current_approve_level, current_cycle_time, 
+      public_id)
+    values (#{id,jdbcType=BIGINT}, #{flowNodeId,jdbcType=BIGINT}, #{approveProjectId,jdbcType=BIGINT}, 
+      #{nodeStatus,jdbcType=VARCHAR}, #{currentApproveLevel,jdbcType=INTEGER}, #{currentCycleTime,jdbcType=INTEGER}, 
+      #{publicId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hcoa.entity.ProjectFlow" >
+    insert into project_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="flowNodeId != null" >
+        flow_node_id,
+      </if>
+      <if test="approveProjectId != null" >
+        approve_project_id,
+      </if>
+      <if test="nodeStatus != null" >
+        node_status,
+      </if>
+      <if test="currentApproveLevel != null" >
+        current_approve_level,
+      </if>
+      <if test="currentCycleTime != null" >
+        current_cycle_time,
+      </if>
+      <if test="publicId != null" >
+        public_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="flowNodeId != null" >
+        #{flowNodeId,jdbcType=BIGINT},
+      </if>
+      <if test="approveProjectId != null" >
+        #{approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="nodeStatus != null" >
+        #{nodeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="currentApproveLevel != null" >
+        #{currentApproveLevel,jdbcType=INTEGER},
+      </if>
+      <if test="currentCycleTime != null" >
+        #{currentCycleTime,jdbcType=INTEGER},
+      </if>
+      <if test="publicId != null" >
+        #{publicId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hcoa.entity.ProjectFlowExample" resultType="java.lang.Integer" >
+    select count(*) from project_flow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project_flow
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.flowNodeId != null" >
+        flow_node_id = #{record.flowNodeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.approveProjectId != null" >
+        approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.nodeStatus != null" >
+        node_status = #{record.nodeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentApproveLevel != null" >
+        current_approve_level = #{record.currentApproveLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentCycleTime != null" >
+        current_cycle_time = #{record.currentCycleTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.publicId != null" >
+        public_id = #{record.publicId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_flow
+    set id = #{record.id,jdbcType=BIGINT},
+      flow_node_id = #{record.flowNodeId,jdbcType=BIGINT},
+      approve_project_id = #{record.approveProjectId,jdbcType=BIGINT},
+      node_status = #{record.nodeStatus,jdbcType=VARCHAR},
+      current_approve_level = #{record.currentApproveLevel,jdbcType=INTEGER},
+      current_cycle_time = #{record.currentCycleTime,jdbcType=INTEGER},
+      public_id = #{record.publicId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hcoa.entity.ProjectFlow" >
+    update project_flow
+    <set >
+      <if test="flowNodeId != null" >
+        flow_node_id = #{flowNodeId,jdbcType=BIGINT},
+      </if>
+      <if test="approveProjectId != null" >
+        approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="nodeStatus != null" >
+        node_status = #{nodeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="currentApproveLevel != null" >
+        current_approve_level = #{currentApproveLevel,jdbcType=INTEGER},
+      </if>
+      <if test="currentCycleTime != null" >
+        current_cycle_time = #{currentCycleTime,jdbcType=INTEGER},
+      </if>
+      <if test="publicId != null" >
+        public_id = #{publicId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hcoa.entity.ProjectFlow" >
+    update project_flow
+    set flow_node_id = #{flowNodeId,jdbcType=BIGINT},
+      approve_project_id = #{approveProjectId,jdbcType=BIGINT},
+      node_status = #{nodeStatus,jdbcType=VARCHAR},
+      current_approve_level = #{currentApproveLevel,jdbcType=INTEGER},
+      current_cycle_time = #{currentCycleTime,jdbcType=INTEGER},
+      public_id = #{publicId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

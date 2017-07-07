@@ -1,0 +1,21 @@
+﻿.table td {text-align: center;}
+.table thead:first-child tr th, .table thead:first-child tr td{ text-align: center; padding-bottom: 12px;}
+input[type="text"]{ margin-bottom: 0px; height: 30px;}
+.pagination>li>a, .pagination>li>span{ color: #666;}
+.pagination{ margin-left: 39%;}
+.main-right h3{ background:url(../../images/index_27.jpg) repeat-x; height:32px;}
+.main-right h3 a{ height:32px; margin-top:-10px; color:#5f5347;}
+.main-right a{ color:#333333;}
+.main-right h3 a:hover{ height:32px; margin-top:-10px; color:#5f5347;}
+.main-top{ margin-bottom:20px; margin-top:20px;}
+.main-top1{ margin-bottom:8px; margin-top:8px; border-bottom:1px dashed #d4d1d1;}
+.slide_tabs {position: absolute;top: 91%;left: 87%;z-index:99; width:80px;}
+.slide_tabs li{ float:left;width:10px; height:10px; display:block; border-radius:5px; background-color:#B9B9B9;}
+.slide_tabs .slide_here{background-color:#fff;border-radius:5px; width:10px; height:10px;}
+.main-right_1{ margin-right:40px;}
+.main-right_2{ margin-right:15px;}
+.hang{display:block;/*内联对象需加*/width:70%;word-break:keep-all;/* 不换行 */white-space:nowrap;/* 不换行 */overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.slide_container{ margin-bottom:0px;}
+.main-right p{margin-bottom:5px; margin-top:5px;height: 25px;}
+.slide .caption{ height:40px;}

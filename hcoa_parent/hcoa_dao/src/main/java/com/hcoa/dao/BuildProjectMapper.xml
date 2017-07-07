@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcoa.dao.BuildProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.hcoa.entity.BuildProject" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="caption" property="caption" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="build_area" property="buildArea" jdbcType="VARCHAR" />
+    <result column="floor_num" property="floorNum" jdbcType="VARCHAR" />
+    <result column="env_check" property="envCheck" jdbcType="VARCHAR" />
+    <result column="build_pro" property="buildPro" jdbcType="VARCHAR" />
+    <result column="keep_eng" property="keepEng" jdbcType="VARCHAR" />
+    <result column="should_research" property="shouldResearch" jdbcType="VARCHAR" />
+    <result column="first_design" property="firstDesign" jdbcType="VARCHAR" />
+    <result column="choose_files" property="chooseFiles" jdbcType="VARCHAR" />
+    <result column="area_plan_agree" property="areaPlanAgree" jdbcType="VARCHAR" />
+    <result column="area_agree" property="areaAgree" jdbcType="VARCHAR" />
+    <result column="build_project_agree" property="buildProjectAgree" jdbcType="VARCHAR" />
+    <result column="kick_off_agree" property="kickOffAgree" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="createby" property="createby" jdbcType="BIGINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="deliver_approve_flag" property="deliverApproveFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, caption, address, area, build_area, floor_num, env_check, build_pro, keep_eng, 
+    should_research, first_design, choose_files, area_plan_agree, area_agree, build_project_agree, 
+    kick_off_agree, remark, createby, createtime, deliver_approve_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hcoa.entity.BuildProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from build_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from build_project
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from build_project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hcoa.entity.BuildProjectExample" >
+    delete from build_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hcoa.entity.BuildProject" >
+    insert into build_project (id, caption, address, 
+      area, build_area, floor_num, 
+      env_check, build_pro, keep_eng, 
+      should_research, first_design, choose_files, 
+      area_plan_agree, area_agree, build_project_agree, 
+      kick_off_agree, remark, createby, 
+      createtime, deliver_approve_flag)
+    values (#{id,jdbcType=BIGINT}, #{caption,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{buildArea,jdbcType=VARCHAR}, #{floorNum,jdbcType=VARCHAR}, 
+      #{envCheck,jdbcType=VARCHAR}, #{buildPro,jdbcType=VARCHAR}, #{keepEng,jdbcType=VARCHAR}, 
+      #{shouldResearch,jdbcType=VARCHAR}, #{firstDesign,jdbcType=VARCHAR}, #{chooseFiles,jdbcType=VARCHAR}, 
+      #{areaPlanAgree,jdbcType=VARCHAR}, #{areaAgree,jdbcType=VARCHAR}, #{buildProjectAgree,jdbcType=VARCHAR}, 
+      #{kickOffAgree,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createby,jdbcType=BIGINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{deliverApproveFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hcoa.entity.BuildProject" >
+    insert into build_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="caption != null" >
+        caption,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="buildArea != null" >
+        build_area,
+      </if>
+      <if test="floorNum != null" >
+        floor_num,
+      </if>
+      <if test="envCheck != null" >
+        env_check,
+      </if>
+      <if test="buildPro != null" >
+        build_pro,
+      </if>
+      <if test="keepEng != null" >
+        keep_eng,
+      </if>
+      <if test="shouldResearch != null" >
+        should_research,
+      </if>
+      <if test="firstDesign != null" >
+        first_design,
+      </if>
+      <if test="chooseFiles != null" >
+        choose_files,
+      </if>
+      <if test="areaPlanAgree != null" >
+        area_plan_agree,
+      </if>
+      <if test="areaAgree != null" >
+        area_agree,
+      </if>
+      <if test="buildProjectAgree != null" >
+        build_project_agree,
+      </if>
+      <if test="kickOffAgree != null" >
+        kick_off_agree,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createby != null" >
+        createby,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="deliverApproveFlag != null" >
+        deliver_approve_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="caption != null" >
+        #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="buildArea != null" >
+        #{buildArea,jdbcType=VARCHAR},
+      </if>
+      <if test="floorNum != null" >
+        #{floorNum,jdbcType=VARCHAR},
+      </if>
+      <if test="envCheck != null" >
+        #{envCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="buildPro != null" >
+        #{buildPro,jdbcType=VARCHAR},
+      </if>
+      <if test="keepEng != null" >
+        #{keepEng,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldResearch != null" >
+        #{shouldResearch,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDesign != null" >
+        #{firstDesign,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseFiles != null" >
+        #{chooseFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="areaPlanAgree != null" >
+        #{areaPlanAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="areaAgree != null" >
+        #{areaAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="buildProjectAgree != null" >
+        #{buildProjectAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="kickOffAgree != null" >
+        #{kickOffAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverApproveFlag != null" >
+        #{deliverApproveFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hcoa.entity.BuildProjectExample" resultType="java.lang.Integer" >
+    select count(*) from build_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update build_project
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.caption != null" >
+        caption = #{record.caption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildArea != null" >
+        build_area = #{record.buildArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floorNum != null" >
+        floor_num = #{record.floorNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.envCheck != null" >
+        env_check = #{record.envCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildPro != null" >
+        build_pro = #{record.buildPro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keepEng != null" >
+        keep_eng = #{record.keepEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shouldResearch != null" >
+        should_research = #{record.shouldResearch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstDesign != null" >
+        first_design = #{record.firstDesign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseFiles != null" >
+        choose_files = #{record.chooseFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaPlanAgree != null" >
+        area_plan_agree = #{record.areaPlanAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaAgree != null" >
+        area_agree = #{record.areaAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildProjectAgree != null" >
+        build_project_agree = #{record.buildProjectAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kickOffAgree != null" >
+        kick_off_agree = #{record.kickOffAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null" >
+        createby = #{record.createby,jdbcType=BIGINT},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliverApproveFlag != null" >
+        deliver_approve_flag = #{record.deliverApproveFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update build_project
+    set id = #{record.id,jdbcType=BIGINT},
+      caption = #{record.caption,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      build_area = #{record.buildArea,jdbcType=VARCHAR},
+      floor_num = #{record.floorNum,jdbcType=VARCHAR},
+      env_check = #{record.envCheck,jdbcType=VARCHAR},
+      build_pro = #{record.buildPro,jdbcType=VARCHAR},
+      keep_eng = #{record.keepEng,jdbcType=VARCHAR},
+      should_research = #{record.shouldResearch,jdbcType=VARCHAR},
+      first_design = #{record.firstDesign,jdbcType=VARCHAR},
+      choose_files = #{record.chooseFiles,jdbcType=VARCHAR},
+      area_plan_agree = #{record.areaPlanAgree,jdbcType=VARCHAR},
+      area_agree = #{record.areaAgree,jdbcType=VARCHAR},
+      build_project_agree = #{record.buildProjectAgree,jdbcType=VARCHAR},
+      kick_off_agree = #{record.kickOffAgree,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      createby = #{record.createby,jdbcType=BIGINT},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      deliver_approve_flag = #{record.deliverApproveFlag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hcoa.entity.BuildProject" >
+    update build_project
+    <set >
+      <if test="caption != null" >
+        caption = #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="buildArea != null" >
+        build_area = #{buildArea,jdbcType=VARCHAR},
+      </if>
+      <if test="floorNum != null" >
+        floor_num = #{floorNum,jdbcType=VARCHAR},
+      </if>
+      <if test="envCheck != null" >
+        env_check = #{envCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="buildPro != null" >
+        build_pro = #{buildPro,jdbcType=VARCHAR},
+      </if>
+      <if test="keepEng != null" >
+        keep_eng = #{keepEng,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldResearch != null" >
+        should_research = #{shouldResearch,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDesign != null" >
+        first_design = #{firstDesign,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseFiles != null" >
+        choose_files = #{chooseFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="areaPlanAgree != null" >
+        area_plan_agree = #{areaPlanAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="areaAgree != null" >
+        area_agree = #{areaAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="buildProjectAgree != null" >
+        build_project_agree = #{buildProjectAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="kickOffAgree != null" >
+        kick_off_agree = #{kickOffAgree,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createby = #{createby,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverApproveFlag != null" >
+        deliver_approve_flag = #{deliverApproveFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hcoa.entity.BuildProject" >
+    update build_project
+    set caption = #{caption,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      build_area = #{buildArea,jdbcType=VARCHAR},
+      floor_num = #{floorNum,jdbcType=VARCHAR},
+      env_check = #{envCheck,jdbcType=VARCHAR},
+      build_pro = #{buildPro,jdbcType=VARCHAR},
+      keep_eng = #{keepEng,jdbcType=VARCHAR},
+      should_research = #{shouldResearch,jdbcType=VARCHAR},
+      first_design = #{firstDesign,jdbcType=VARCHAR},
+      choose_files = #{chooseFiles,jdbcType=VARCHAR},
+      area_plan_agree = #{areaPlanAgree,jdbcType=VARCHAR},
+      area_agree = #{areaAgree,jdbcType=VARCHAR},
+      build_project_agree = #{buildProjectAgree,jdbcType=VARCHAR},
+      kick_off_agree = #{kickOffAgree,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createby = #{createby,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      deliver_approve_flag = #{deliverApproveFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
