@@ -7,7 +7,6 @@ $(document).ready(function(){
 				
 				var forumid = $("#forumid").val();
 				var action = "addReplyForum";
-				
 				var path = "detailForum?id="+forumid;
 				
 				doSubmit(form, action, path);

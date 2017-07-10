@@ -33,4 +33,12 @@ public interface ForumMapper {
     int updateByPrimaryKeyWithBLOBs(Forum record);
 
     int updateByPrimaryKey(Forum record);
+    
+    List<Forum> selectAll();
+
+	List<Forum> selectById(Long id);
+
+	Forum selectOne(Long id);
+
+	void delById(Long id);
 }

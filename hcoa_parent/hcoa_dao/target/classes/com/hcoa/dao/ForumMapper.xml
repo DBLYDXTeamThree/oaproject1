@@ -284,4 +284,30 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <resultMap id="FindResultMap" type="com.hcoa.entity.Forum" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="caption" property="caption" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="createby" property="createby" jdbcType="BIGINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association property="staff" javaType="com.hcoa.entity.StaffInfo">
+      <result column="realname" property="realname" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <select id="selectAll" resultMap="FindResultMap" >
+    select a.*,b.realname from forum a left join staff_info b on a.createby=b.id where parent_id is null order by a.id desc
+  </select>
+  <select id="selectById" resultMap="FindResultMap" parameterType="Long">
+    select a.*,b.realname from forum a left join staff_info b on a.createby=b.id where parent_id=#{id} order by a.id desc
+  </select>
+  <select id="selectOne" resultMap="FindResultMap" parameterType="Long">
+    select a.*,b.realname from forum a left join staff_info b on a.createby=b.id where a.id=#{id} 
+  </select>
+  <delete id="delById" parameterType="Long">
+    delete from forum where id=#{id} or parent_id=#{id}
+  </delete>
 </mapper>

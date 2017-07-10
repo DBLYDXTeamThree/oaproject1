@@ -2,26 +2,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="itcast" uri="http://itcast.cn/common/"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/title/Examination1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/title/Examination1.css">
 
 <!--** 下面的js不能删除袄 这5个是公用的 也不能改袄**-->
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-switch.js"></script>
-<script type="text/javascript" src="js/user/user_manager.js"></script>
-<script type="text/javascript" src="js/user/mh.js"></script>
-<script type="text/javascript" src="js/forum/forum.js"></script>
-<script type="text/javascript" src="js/lib.js"></script>
-<script type="text/javascript" src="js/init.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/user/user_manager.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/user/mh.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/forum/forum.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
 
 <!--面包屑导航-->
   <ol class="breadcrumb">
@@ -69,13 +70,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				...
       	    </c:if>
 	              </th>
-	             <th> ${forumlist.user.realname}</th>
+	             <th> ${forumlist.staff.realname}</th>
 	             <th><fmt:formatDate value="${forumlist.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/>  </th>
 				 <th><a href="detailForum?id=${forumlist.id }" >回复</a>&nbsp;<a href="delForum?id=${forumlist.id}" onclick="return confirm('确定删除吗?');" >删帖</a>&nbsp;</th>
 				 </tr>
 	          </c:forEach>
+	          <%-- <itcast:page url="${pageContext.request.contextPath }/getForums" /> --%>
             </thead>
+            
         </table>
+        
 </form>
 
   <script type="text/javascript">
@@ -89,10 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>哈尔滨市交通基础设施投资建设管理有限公司 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：鑫联华</p>
   </div>
 <!--尾部结束-->
- <script src="js/index/responsiveslides.min.js"></script>
- <script src="js/index/slider.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/index/responsiveslides.min.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/index/slider.js"></script>
 
- <link rel="stylesheet" type="text/css" href="css/table/table.css">
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/table/table.css">
 
 <!--尾部结束-->
 </body>

@@ -2,7 +2,7 @@
 	
 	 $("#add").click(function(){
 		
-		 window.location.href = "forum/addForum";
+		 window.location.href = "addForum";
 	 });
  });
  
