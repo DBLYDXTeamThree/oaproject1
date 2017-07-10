@@ -1,6 +1,7 @@
 package com.hcoa.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcoa.dao.ApproveLevelMapper;
 import com.hcoa.dao.DepartmentMapper;
+import com.hcoa.dao.FlowNodeMapper;
 import com.hcoa.dao.StaffInfoMapper;
 import com.hcoa.entity.Department;
 import com.hcoa.entity.DepartmentExample;
+import com.hcoa.entity.FlowNode;
 import com.hcoa.entity.StaffInfo;
 import com.hcoa.entity.StaffInfoExample;
 
@@ -21,6 +25,12 @@ public class BaseServiceImpl implements BaseService {
 	DepartmentMapper detpMapper;
 	@Autowired
 	StaffInfoMapper staffInfoMapper;
+	@Autowired
+	FlowNodeMapper flowNodeMapper;
+	@Autowired
+	ApproveLevelMapper approveLevelMapper;
+	
+	
 	
 	public List<Department> getDepts(){
 		return detpMapper.selectByExample(new DepartmentExample());
@@ -52,5 +62,26 @@ public class BaseServiceImpl implements BaseService {
 		map.put("3", list3);
 		map.put("4", list4);
 		return map;
+	}
+
+	public Map<String, Object> getBuildPersonList(Long projectId) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		List<FlowNode> flowNodes = flowNodeMapper.getFlowNodeByProjectId(projectId);
+		for(FlowNode fn : flowNodes){
+			System.err.println("==============");
+			Long id = approveLevelMapper.getIdByFlowNodeId(fn.getId());
+			System.out.println("approveLevelId="+id);
+			List<Long> roleIds = approveLevelMapper.getRoleIdByApproveLevelId(id);
+			for (Long long1 : roleIds) {
+				System.err.println(long1);
+			}
+			List<StaffInfo> staffs = staffInfoMapper.getUserByIds(roleIds);
+			System.out.println("人数"+staffs.size());
+			map.put(fn.getNodeNum(), staffs);
+			System.err.println("=============");
+		}
+		Map<String,Object> map1 = new HashMap<String, Object>();
+		map1.put("personMap", map);
+		return map1;
 	}
 }

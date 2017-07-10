@@ -33,4 +33,6 @@ public interface FlowNodeMapper {
     int updateByPrimaryKeyWithBLOBs(FlowNode record);
 
     int updateByPrimaryKey(FlowNode record);
+    
+    List<FlowNode> getFlowNodeByProjectId(Long projuectId);
 }

@@ -29,4 +29,6 @@ public interface StaffInfoMapper {
     int updateByPrimaryKey(StaffInfo record);
     
     StaffInfo selectByUsernameAndPassword(String username,String password);
+    
+    List<StaffInfo> getUserByIds(List<Long> roleIds);
 }

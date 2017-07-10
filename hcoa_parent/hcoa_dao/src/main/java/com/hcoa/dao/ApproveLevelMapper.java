@@ -27,4 +27,8 @@ public interface ApproveLevelMapper {
     int updateByPrimaryKeySelective(ApproveLevel record);
 
     int updateByPrimaryKey(ApproveLevel record);
+    
+    List<Long> getRoleIdByApproveLevelId(Long id);
+    
+    Long getIdByFlowNodeId(Long id);
 }
