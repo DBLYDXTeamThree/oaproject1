@@ -5,7 +5,7 @@ var menuList =
  	//首页
  	new MenuItem
  	({
- 		id: "main",
+ 		id: "index",
  		
  		code: "SY",
  		
@@ -345,7 +345,7 @@ function createFirstMenu(item)
 		(
 			function ()
 			{
-				window.location.href = "/base/" + item.id;
+				window.location.href = "/hcoa_web/" + item.id;
 			}
 		);
 	}

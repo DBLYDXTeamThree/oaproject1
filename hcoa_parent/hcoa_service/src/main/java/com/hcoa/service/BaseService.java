@@ -17,5 +17,11 @@ public interface BaseService {
 	 * @return
 	 */
 	public Map<String,Object> getPersonList();
+	
+	/**
+	 * 新建立项人员查询
+	 * @return
+	 */
+	public Map<String,Object> getBuildPersonList(Long projectId);
 
 }

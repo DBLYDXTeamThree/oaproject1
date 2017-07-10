@@ -338,4 +338,9 @@
       approve_project_id = #{approveProjectId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getFlowNodeByProjectId" resultMap="BaseResultMap">
+  	select * from flow_node where approve_project_id = #{projectId} order by node_num+0
+  </select>
+  
 </mapper>

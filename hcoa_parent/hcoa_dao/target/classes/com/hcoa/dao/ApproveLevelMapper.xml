@@ -193,4 +193,13 @@
       approve_level = #{approveLevel,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getIdByFlowNodeId" resultType="long">
+  	select id from approve_level where flow_node_id = #{id}
+  </select>
+  
+  <select id="getRoleIdByApproveLevelId" resultType="long">
+  	select a.role_id from approve_role a ,approve_level b where a.approve_level_id = b.id and  b.id=#{id}
+  </select>
+  
 </mapper>

@@ -447,4 +447,13 @@
       from staff_info a, department b where a.department_id = b.id
   </select>
   
+  
+  <select id="getUserByIds" parameterType="Long" resultMap="BaseResultMap">
+  	select * from staff_info where 
+  	<foreach collection="list" open=" role_id in(" close=")" item="id" separator=",">
+			#{id}	
+  	</foreach>
+  
+  </select>
+  
 </mapper>
