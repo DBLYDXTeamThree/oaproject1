@@ -16,8 +16,18 @@ public class Forum {
     private String remark;
 
     private String content;
+    //发件人信息
+    private StaffInfo staff;
 
-    public Long getId() {
+    public StaffInfo getStaff() {
+		return staff;
+	}
+
+	public void setStaff(StaffInfo staff) {
+		this.staff = staff;
+	}
+
+	public Long getId() {
         return id;
     }
 
