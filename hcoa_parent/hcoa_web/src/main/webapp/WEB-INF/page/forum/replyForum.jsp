@@ -7,20 +7,20 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/dispatch/From.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/dispatch/jquery.datetimepicker.css">  
-<link rel="stylesheet" type="text/css" href="css/dispatch/demo.css">
-<link rel="stylesheet" type="text/css" href="css/dispatch/From_1.css" >
-<link rel="stylesheet" type="text/css" href="css/dispatch/datePicker.css">
-<link rel="stylesheet" type="text/css" href="css/index.css" >
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-switch.js"></script>
-<script type="text/javascript" src="js/lib.js"></script>
-<script type="text/javascript" src="js/init.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/From.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/jquery.datetimepicker.css">  
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/demo.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/From_1.css" >
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/datePicker.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css" >
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
 
 <!--内容开始-->
 <div class="main-right">
@@ -32,21 +32,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </ol>
 <!--面包屑导航-->
 <!--表单-->
-<form class="form-inline registerform addreplyForum" action = "" name="form1" method = "post" enctype='multipart/form-data'style="min-height:360px;">
+<form class="form-inline registerform addreplyForum" action="addReplyForum" name="form1" method = "post" enctype='multipart/form-data'style="min-height:360px;">
         <div class="Reply" style="width:99%; margin:0 auto; border: #cccccc solid 1px;border-radius:5px;">
            <div class="Reply_title" style="width:98%; margin:0 auto; border-bottom: #cccccc solid 1px;">
-             <p style="color:#353535;font-size:16px;font-weight:bold;line-height: 55px;height: auto;padding-right: 10px; padding-left: 10px;"><span id="detail1" style="color:#000; float:lift">${detailList.caption}</Span><span style="color:#ababab; float:right" id="detail4"><fmt:formatDate value="${detailList.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/></span><span style="color:#000; float:right; padding-right:20px;" id="detail3">${detailList.user.realname}</span></p>
+             <p style="color:#353535;font-size:16px;font-weight:bold;line-height: 55px;height: auto;padding-right: 10px; padding-left: 10px;"><span id="detail1" style="color:#000; float:lift">${detailList.caption}</Span><span style="color:#ababab; float:right" id="detail4"><fmt:formatDate value="${detailList.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/></span><span style="color:#000; float:right; padding-right:20px;" id="detail3">${detailList.staff.realname}</span></p>
            </div>
            <div class="Reply_content" id="detail2" style="width:98%; margin:0 auto;text-indent:2em; color:#989898; height:150px;line-height: 30px; margin-top:5px;max-height: 150px;overflow: auto;">
 				${detailList.content}
            </div>
-           <input type="hidden" id="createby" value=""/>
-           <input type="hidden" id="forumid" value="${id }"/>
+           <input type="hidden" id="createby" name="createby" value="${staff.id}"/>
+           <input type="hidden" id="forumid" name="forumid" value="${detailList.id  }"/>
         </div>
          <div class="Reply_Details" style="width:99%; margin:0 auto; border: #cccccc solid 1px;border-radius:5px; margin-top:20px;">
             <textarea name="content" datatype="*" nullmsg="请输入回复内容！" style="width:100%; height:150px; border:none"></textarea>
          </div>
-         <button type="submit" id="subBtn" class="btn" style="margin:20px; float:right">保存</button>
+         <a id="back" href="getForums" class="btn" style="margin:10px; float:right">返回</a>
+         <button type="submit"  id="subBtn" class="btn" style="margin:10px; float:right">保存</button>
         <table class="table table-hover table-bordered">
             <thead class="reply1" id="forumList">
             <tr style="background-color:#EEEEEE;color: #000;">
@@ -59,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <c:forEach items="${findreplyList}" var="findreplyList">
 	          <tr style="background-color:#EEEEEE;color: #000;">
 	             <th> ${findreplyList.id}</th>
-	             <th> ${findreplyList.user.realname}</th>
+	             <th> ${findreplyList.staff.realname}</th>
 	             <th> ${findreplyList.content}</th>
 	             <th><fmt:formatDate value="${findreplyList.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/>  </th>
 				 
@@ -81,13 +82,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 <!--尾部结束-->
 
-<script type="text/javascript" src="js/forum/replyforum.js"></script>  
-<script type="text/javascript" src="js/from/Validform_v5.3.2_min.js"></script>
-<script type="text/javascript" src="js/from/passwordStrength-min.js"></script>
-<script type="text/javascript" src="js/from/jquery.datePicker-min.js"></script>
-<script type="text/javascript" src="js/from/jquery.datetimepicker.js"></script>  
- <script src="js/index/responsiveslides.min.js"></script>
- <script src="js/index/slider.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/forum/replyforum.js"></script>  --%> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/passwordStrength-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/jquery.datePicker-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/jquery.datetimepicker.js"></script>  
+ <script src="${pageContext.request.contextPath}/resources/js/index/responsiveslides.min.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/index/slider.js"></script>
 <!--尾部结束-->
 </body>
 </html>
