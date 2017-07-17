@@ -46,8 +46,91 @@ public class SendArticle {
     private Integer publishFlag;
 
     private Integer deliverApproveFlag;
+    
+    private String checkerName1;
+    
+    private String deptName;
+    
+    private Boolean result;
+    
+    //部门
+    private Department department;
+    //签发
+    private StaffInfo dispatcherName;
+    //会签
+    private StaffInfo unitSignName;
+    //审核
+    private StaffInfo checkerName;
+    //核稿
+    private StaffInfo checkArticleName;
 
-    public Long getId() {
+   
+
+	public Boolean getResult() {
+		return result;
+	}
+
+	public void setResult(Boolean result) {
+		this.result = result;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getCheckerName1() {
+		return checkerName1;
+	}
+
+	public void setCheckerName1(String checkerName1) {
+		this.checkerName1 = checkerName1;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public StaffInfo getDispatcherName() {
+		return dispatcherName;
+	}
+
+	public void setDispatcherName(StaffInfo dispatcherName) {
+		this.dispatcherName = dispatcherName;
+	}
+
+	public StaffInfo getUnitSignName() {
+		return unitSignName;
+	}
+
+	public void setUnitSignName(StaffInfo unitSignName) {
+		this.unitSignName = unitSignName;
+	}
+
+	public StaffInfo getCheckerName() {
+		return checkerName;
+	}
+
+	public void setCheckerName(StaffInfo checkerName) {
+		this.checkerName = checkerName;
+	}
+
+	public StaffInfo getCheckArticleName() {
+		return checkArticleName;
+	}
+
+	public void setCheckArticleName(StaffInfo checkArticleName) {
+		this.checkArticleName = checkArticleName;
+	}
+
+	public Long getId() {
         return id;
     }
 

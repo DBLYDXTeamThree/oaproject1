@@ -82,7 +82,7 @@ $(
 					
 					function (data)
 					{
-						window.location.href = "/base/getBuild_projects";
+						window.location.href = "getBuild_projects";
 					},
 					
 					{buildid: id, remark: $("#remark").val()}
@@ -129,7 +129,7 @@ function loadBuildProjectList(id)
 			var attachList = data["build_project_attachList"];
 			
 			
-			var keyList = ["file_name"];
+			var keyList = ["fileName"];
 
 			$.each
 			(

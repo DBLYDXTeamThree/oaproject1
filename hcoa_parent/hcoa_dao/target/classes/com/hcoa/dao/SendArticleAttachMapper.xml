@@ -240,4 +240,10 @@
       remark = #{remark,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="selectFire" parameterType="long" resultMap="BaseResultMap" >
+    select * from send_article_attach where send_article_id=#{id}
+  </select>
+    <select id="selectByid" parameterType="long" resultType="com.hcoa.entity.SendArticleAttach" >
+    select * from send_article_attach where send_article_id=#{id}
+  </select>
 </mapper>

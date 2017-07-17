@@ -34,7 +34,9 @@ $(
 					{
 						$("#closeBtn").trigger("click");
 						
-						loadProjects();
+						/*loadProjects();*/
+						
+						window.location.href="flow_manager";
 					},
 					
 					formToJson($("form[name='editForm']"))

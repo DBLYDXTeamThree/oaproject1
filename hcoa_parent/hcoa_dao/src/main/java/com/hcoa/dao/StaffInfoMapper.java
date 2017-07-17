@@ -6,29 +6,38 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface StaffInfoMapper {
-    int countByExample(StaffInfoExample example);
+	int countByExample(StaffInfoExample example);
 
-    int deleteByExample(StaffInfoExample example);
+	int deleteByExample(StaffInfoExample example);
 
-    int deleteByPrimaryKey(Long id);
+	int deleteByPrimaryKey(Long id);
 
-    int insert(StaffInfo record);
+	int insert(StaffInfo record);
 
-    int insertSelective(StaffInfo record);
+	int insertSelective(StaffInfo record);
 
-    List<StaffInfo> selectByExample(StaffInfoExample example);
+	List<StaffInfo> selectByExample(StaffInfoExample example);
 
-    StaffInfo selectByPrimaryKey(Long id);
+	StaffInfo selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") StaffInfo record, @Param("example") StaffInfoExample example);
+	int updateByExampleSelective(@Param("record") StaffInfo record, @Param("example") StaffInfoExample example);
 
-    int updateByExample(@Param("record") StaffInfo record, @Param("example") StaffInfoExample example);
+	int updateByExample(@Param("record") StaffInfo record, @Param("example") StaffInfoExample example);
 
-    int updateByPrimaryKeySelective(StaffInfo record);
+	int updateByPrimaryKeySelective(StaffInfo record);
 
-    int updateByPrimaryKey(StaffInfo record);
-    
-    StaffInfo selectByUsernameAndPassword(String username,String password);
-    
-    List<StaffInfo> getUserByIds(List<Long> roleIds);
+	int updateByPrimaryKey(StaffInfo record);
+
+	StaffInfo selectByUsernameAndPassword(String username, String password);
+
+	List<StaffInfo> getUserByIds(List<Long> roleIds);
+
+	List<StaffInfo> selectStaff();
+
+	List<StaffInfo> selectStaffByDept(Long id);
+
+	void fireUserById(long id);
+
+	List<StaffInfo> searchByRealName(@Param("realname") String realname);
+
 }

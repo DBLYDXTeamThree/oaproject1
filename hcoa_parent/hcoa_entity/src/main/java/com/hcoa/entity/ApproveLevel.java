@@ -8,8 +8,18 @@ public class ApproveLevel {
     private String ruleCaption;
 
     private Integer approveLevel;
+    
+    private Long []ids;
 
-    public Long getId() {
+    public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
+	}
+
+	public Long getId() {
         return id;
     }
 

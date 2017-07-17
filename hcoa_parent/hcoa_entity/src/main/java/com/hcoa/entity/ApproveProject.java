@@ -18,12 +18,53 @@ public class ApproveProject {
     private String businessUrl;
 
     private String content;
+    
+    private StaffInfo si;
+    
+    private Department dept;
+   
+    private String name;
+    public String getName() {
+		return name;
+	}
 
-    public Long getId() {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	private Long ids[];
+    
+   public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
+	}
+
+public StaffInfo getSi() {
+		return si;
+	}
+
+	public void setSi(StaffInfo si) {
+		this.si = si;
+	}
+
+
+
+    public Department getDept() {
+		return dept;
+	}
+
+	public void setDept(Department dept) {
+		this.dept = dept;
+	}
+
+	public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+	public void setId(Long id) {
         this.id = id;
     }
 
@@ -82,4 +123,5 @@ public class ApproveProject {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+  
 }

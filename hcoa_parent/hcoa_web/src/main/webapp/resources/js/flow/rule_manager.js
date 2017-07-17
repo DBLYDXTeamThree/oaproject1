@@ -11,7 +11,7 @@ $(
 			}
 		);
 		
-		$("#subBtn").click
+		/*$("#subBtn").click
 		(
 			function ()
 			{
@@ -22,15 +22,15 @@ $(
 					function (data)
 					{
 						$("#closeBtn").trigger("click");
-						
 						loadRules();
+						window.location.href="rule_manager";
 					},
 					
 					formToJson($("form[name='addForm']"))
 				);
 			}
-		);
-		
+		);*/
+
 		$("#selRoleBtn").click
 		(
 			function ()

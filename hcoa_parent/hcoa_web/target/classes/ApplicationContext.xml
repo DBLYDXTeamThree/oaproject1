@@ -63,7 +63,7 @@
 	<!-- 切面 -->
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"
-			pointcut="execution(* com.hcoa.service.*.*.*(..))" />
+			pointcut="execution(* com.hcoa.service.*.*(..))" />
 	</aop:config>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	

@@ -2,6 +2,8 @@ package com.hcoa.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,17 +70,22 @@ public class BaseServiceImpl implements BaseService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		List<FlowNode> flowNodes = flowNodeMapper.getFlowNodeByProjectId(projectId);
 		for(FlowNode fn : flowNodes){
-			System.err.println("==============");
 			Long id = approveLevelMapper.getIdByFlowNodeId(fn.getId());
-			System.out.println("approveLevelId="+id);
 			List<Long> roleIds = approveLevelMapper.getRoleIdByApproveLevelId(id);
-			for (Long long1 : roleIds) {
-				System.err.println(long1);
-			}
 			List<StaffInfo> staffs = staffInfoMapper.getUserByIds(roleIds);
-			System.out.println("人数"+staffs.size());
-			map.put(fn.getNodeNum(), staffs);
-			System.err.println("=============");
+			List<StaffInfo> staffs1 = new ArrayList<StaffInfo>();
+			Collections.copy(staffs, staffs1);
+			if(projectId==2l){
+				System.err.println("==========="+projectId);
+				for(StaffInfo sf:staffs){
+					if(sf.getRoleId()==4l||sf.getDepartmentId()==2l){
+						staffs1.add(sf);
+					}
+				}
+				map.put(fn.getNodeNum(), staffs1);
+			}
+			else
+				map.put(fn.getNodeNum(), staffs);
 		}
 		Map<String,Object> map1 = new HashMap<String, Object>();
 		map1.put("personMap", map);

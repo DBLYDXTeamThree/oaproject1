@@ -6,8 +6,18 @@ public class RoleSet {
     private String roleCaption;
 
     private String remark;
+    
+    private boolean chosen;
+    
+    public boolean getChosen() {
+		return chosen;
+	}
 
-    public Long getId() {
+	public void setChosen(boolean chosen) {
+		this.chosen = chosen;
+	}
+
+	public Long getId() {
         return id;
     }
 

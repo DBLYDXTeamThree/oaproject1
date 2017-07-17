@@ -33,4 +33,8 @@ public interface ApproveMapper {
     int updateByPrimaryKeyWithBLOBs(Approve record);
 
     int updateByPrimaryKey(Approve record);
+
+	List<Approve> selectAll(Long id);
+
+	List<Approve> selectAllProcessing(Long id);
 }

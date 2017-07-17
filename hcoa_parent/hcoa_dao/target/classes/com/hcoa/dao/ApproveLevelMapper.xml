@@ -82,6 +82,15 @@
       order by ${orderByClause}
     </if>
   </select>
+  <resultMap id="FindLevelMap" type="com.hcoa.entity.ApproveLevel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="flow_node_id" property="flowNodeId" jdbcType="BIGINT" />
+    <result column="rule_caption" property="ruleCaption" jdbcType="VARCHAR" />
+    <result column="approve_level" property="approveLevel" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="getLevel" resultMap="FindLevelMap">
+  select * from approve_level where flow_node_id=#{flag}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -194,6 +203,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   
+    
   <select id="getIdByFlowNodeId" resultType="long">
   	select id from approve_level where flow_node_id = #{id}
   </select>

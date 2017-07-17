@@ -477,4 +477,88 @@
       deliver_approve_flag = #{deliverApproveFlag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="findCheckername" parameterType="long" resultType="string" >
+    select realname from staff_info where id=#{checker}
+  </select>
+      <select id="findDeptName" parameterType="long" resultType="string" >
+    select department_caption from department where id=#{mainDept}
+  </select>
+    <select id="getname" parameterType="long" resultType="com.hcoa.entity.StaffInfo" >
+    select * from staff_info where id=#{createby}
+  </select>
+  
+  <resultMap id="FindResultMap" type="com.hcoa.entity.SendArticle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dispatcher" property="dispatcher" jdbcType="BIGINT" />
+    <result column="unit_sign" property="unitSign" jdbcType="BIGINT" />
+    <result column="checker" property="checker" jdbcType="BIGINT" />
+    <result column="check_article" property="checkArticle" jdbcType="BIGINT" />
+    <result column="main_dept" property="mainDept" jdbcType="VARCHAR" />
+    <result column="drafter" property="drafter" jdbcType="VARCHAR" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="secret_level" property="secretLevel" jdbcType="VARCHAR" />
+    <result column="file_num" property="fileNum" jdbcType="VARCHAR" />
+    <result column="caption" property="caption" jdbcType="VARCHAR" />
+    <result column="attach" property="attach" jdbcType="INTEGER" />
+    <result column="main_send" property="mainSend" jdbcType="VARCHAR" />
+    <result column="cc" property="cc" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="typer" property="typer" jdbcType="VARCHAR" />
+    <result column="check_confirm" property="checkConfirm" jdbcType="VARCHAR" />
+    <result column="copies" property="copies" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createby" property="createby" jdbcType="BIGINT" />
+    <result column="publish_flag" property="publishFlag" jdbcType="INTEGER" />
+    <result column="deliver_approve_flag" property="deliverApproveFlag" jdbcType="INTEGER" />
+    <association property="department" javaType="com.hcoa.entity.Department">
+      <result column="department_caption" property="departmentCaption" jdbcType="VARCHAR" />
+    </association>
+    <association property="dispatcherName" javaType="com.hcoa.entity.StaffInfo">
+      <result column="crealname" property="realname" jdbcType="VARCHAR" />
+    </association>
+    <association property="unitSignName" javaType="com.hcoa.entity.StaffInfo">
+      <result column="drealname" property="realname" jdbcType="VARCHAR" />
+    </association>
+    <association property="checkerName" javaType="com.hcoa.entity.StaffInfo">
+      <result column="erealname" property="realname" jdbcType="VARCHAR" />
+    </association>
+    <association property="checkArticleName" javaType="com.hcoa.entity.StaffInfo">
+      <result column="frealname" property="realname" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <select id="selectAll" parameterType="Long" resultMap="FindResultMap">
+     select a.*,b.department_caption,c.realname crealname,d.realname drealname,
+     e.realname erealname,f.realname frealname
+     from send_article a left join department b on a.main_dept=b.id 
+     left join staff_info c  on a.dispatcher=c.id
+     left join staff_info d  on a.unit_sign=d.id
+     left join staff_info e  on a.checker=e.id
+     left join staff_info f  on a.check_article=f.id
+     where createby=#{id}  order by a.id desc
+     
+  </select>
+  <select id="getI" resultType="Long" parameterType="map">
+    select ${nodeCode} from send_article where id=#{articleid}
+  </select>
+  <select id="selectOneSendArticle" parameterType="long" resultMap="FindResultMap">
+    select a.*,b.department_caption,c.realname crealname,d.realname drealname,
+     e.realname erealname,f.realname frealname
+     from send_article a left join department b on a.main_dept=b.id 
+     left join staff_info c  on a.dispatcher=c.id
+     left join staff_info d  on a.unit_sign=d.id
+     left join staff_info e  on a.checker=e.id
+     left join staff_info f  on a.check_article=f.id
+     where a.id=#{id}
+  </select>
+    <select id="selectarticle_manager_all"  resultMap="FindResultMap">
+   select a.*,b.department_caption,c.realname crealname,d.realname drealname,
+     e.realname erealname,f.realname frealname
+     from send_article a left join department b on a.main_dept=b.id 
+     left join staff_info c  on a.dispatcher=c.id
+     left join staff_info d  on a.unit_sign=d.id
+     left join staff_info e  on a.checker=e.id
+     left join staff_info f  on a.check_article=f.id
+     order by a.id desc
+  </select>
 </mapper>

@@ -2,7 +2,11 @@ package com.hcoa.dao;
 
 import com.hcoa.entity.SendArticle;
 import com.hcoa.entity.SendArticleExample;
+import com.hcoa.entity.StaffInfo;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SendArticleMapper {
@@ -27,4 +31,18 @@ public interface SendArticleMapper {
     int updateByPrimaryKeySelective(SendArticle record);
 
     int updateByPrimaryKey(SendArticle record);
+
+	String findCheckername(Long checker);
+
+	String findDeptName(Long l);
+
+	StaffInfo getname(Long createby);
+	
+	List<SendArticle> selectAll(Long id);
+
+	Long getI(Map<String,Object> map);
+
+	SendArticle selectOneSendArticle(long id);
+	
+	List<SendArticle> selectarticle_manager_all();
 }

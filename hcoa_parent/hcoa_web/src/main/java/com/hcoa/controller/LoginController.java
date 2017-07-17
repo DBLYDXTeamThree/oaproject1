@@ -28,10 +28,10 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping("/index")
+/*	@RequestMapping("/index")
 	public String toIndex(){
 		return "index";
-	}
+	}*/
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){

@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
+	
 
 <!--导航结束-->
 <!--内容开始-->
@@ -34,36 +35,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--面包屑导航-->
 <div id="data"></div>
 <!--表单-->
-<form class="form-inline registerform" name="addForm" method = "post" enctype='multipart/form-data'>
+<form class="form-inline registerform" name="addForm" method = "post" enctype='multipart/form-data' action="saveArticle">
 	<input type="hidden" id="article_id" name="id" value="${article.id}"/>
 	<input type="hidden" id="article_status" name="deliver_approve_flag" value="${article.deliver_approve_flag}"/>
   <div class="form-group">
       <label class="form-label"><span style="color:red;">*&nbsp;</span>签发</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node" id="dispatcherName" value="${article.dispatcher.realname}" node-id="1" node-name="签发" data-toggle="modal" data-target="#myModal">
-          <input type="hidden" value="${article.dispatcher.id}" name="dispatcher.id">
+          <input type="hidden" value="${article.dispatcher.id}" name="dispatcher">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>审核</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node" id="checkerName" value="${article.checker.realname}" data-toggle="modal" node-id="2" node-name="审核" data-target="#myModal" id="myModal_2">
-          <input type="hidden" name="checker.id" value="${article.checker.id}">
+          <input type="hidden" name="checker" value="${article.checker.id}">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>会签</label>
       <div class="controls">
          <input type="tel" class="input-medium flow-node" id="unitSignName" value="${article.unit_sign.realname}" data-toggle="modal" node-id="3" node-name="会签" data-target="#myModal" id="myModal_3">
-         <input type="hidden" name="unit_sign.id" value="${article.unit_sign.id}">
+         <input type="hidden" name="unitSign" value="${article.unitSign.id}">
       </div>
   </div>
   <div class="form-group">
       <label class="control-label"> <span style="color:red;">*&nbsp;</span>主办部门</label>
       <div class="controls">
                <div class="btn-group">
-               <input type="hidden" id="dept_id" value="${article.dept.id}"/>
-               <select class="selectpicker" id="department" name="dept.id" value="${article.dept.id}"  data-style="btn-primary" style="width: 150px; height: 30px;">
+               <input type="hidden" id="deptId" value="${article.dept.id}"/>
+               <select class="selectpicker" id="department" name="mainDept" value="${article.dept.id}"  data-style="btn-primary" style="width: 150px; height: 30px;">
                </select>
                </div>
            </div>
@@ -72,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="form-label"><span style="color:red;">*&nbsp;</span>核稿</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node" id="checkArticleName" value="${article.check_article.realname}" data-toggle="modal" node-id="4" node-name="核稿" data-target="#myModal" id="myModal_4">
-          <input type="hidden" name="check_article.id" value="${article.check_article.id}">
+          <input type="hidden" name="checkArticle" value="${article.check_article.id}">
       </div>
   </div>
   <div class="form-group">
@@ -85,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"> <span style="color:red;">*&nbsp;</span>秘密等级</label>
       <div class="controls">
                <div class="btn-group"> 
-               <select class="selectpicker" data-style="btn-primary" name="secret_level" value="${article.secret_level}" style="width: 150px;height: 30px;">
+               <select class="selectpicker" data-style="btn-primary" name="secretLevel" value="${article.secret_level}" style="width: 150px;height: 30px;">
                       <option value="1" <c:if test="${article.secret_level == 1}">selected="selected"</c:if>>1</option>
                       <option value="2" <c:if test="${article.secret_level == 2}">selected="selected"</c:if>>2</option>
                       <option value="3" <c:if test="${article.secret_level == 3}">selected="selected"</c:if>>3</option>
@@ -109,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="form-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>哈交投</label>
       <div class="controls">
-          <input type="text" name="file_num" value="${article.file_num}" class="input-medium">
+          <input type="text" name="fileNum" value="${article.file_num}" class="input-medium">
       </div>
   </div>
   
@@ -134,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="form-group">
       <label class="control-label"> <span style="color:red;">*&nbsp;</span>校对</label>
       <div class="controls">
-          <input type="text" name="check_confirm" value="${article.check_confirm}" class="input-medium" value="">
+          <input type="text" name="checkConfirm" value="${article.check_confirm}" class="input-medium" value="">
       </div>
   </div>
   <div class="form-group">
@@ -147,13 +148,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="form-label"><span style="color:red;">*&nbsp;</span>撰写日期</label>
       <div class="controls">
       	<fmt:formatDate value="${article.createtime}" type="date" pattern="yyyy-MM-dd" var="createtime"/>
-        <input type="text" name="createtime" value="${createtime}" placeholder="2015/08/25" class="input-medium" id="datetimepicker2"> 
+        <input type="text" name="createtime1" value="${createtime}" placeholder="2015/08/25" class="input-medium" id="datetimepicker2"> 
       </div>
   </div>
    <div class="clear"></div>
   <div class="form-group" style="width: 300px;float: left;" id="butt">
       <div class="controls controls1">
-          <button type="button" id="saveBtn" class="btn btn-primary">保存</button>
+          <input type="submit" id="saveBtn1" class="btn btn-primary" value="保存"></input>
           <input type="hidden" id="publish_flag" name="publish_flag"/>
       </div>
   </div>

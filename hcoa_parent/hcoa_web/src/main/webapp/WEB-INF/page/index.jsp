@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: acer1
-  Date: 2017/7/2
-  Time: 17:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
   <!--  <base href="http://localhost:8080/base/">-->
@@ -118,100 +114,57 @@
             <!--快速通道-->
             <h3 style="border:1px solid #d4d1d1;"><a href="#" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>admin</a></h3>
             <ul style="border:1px solid #d4d1d1;">
-                <li class="col-xs-4 col-sm-4 col-md-4 main-top"><a href="sendArticle/dispatch"><img src="${pageContext.request.contextPath}/resources/images/index_10.jpg" alt=""/></a></li>
-                <li class="col-xs-4 col-sm-4 col-md-4 main-top"><a href="sendArticle/backlog_manager"><img src="${pageContext.request.contextPath}/resources/images/index_12.jpg" alt=""/></a></li>
-                <li class="col-xs-4 col-sm-4 col-md-4 main-top"><a href="sendArticle/article_manager"><img src="${pageContext.request.contextPath}/resources/images/index_14.jpg" alt=""/></a></li>
+                <li class="col-xs-4 col-sm-4 col-md-4 main-top"><a href="dispatch"><img src="${pageContext.request.contextPath}/resources/images/index_10.jpg" alt=""/></a></li>
+                <li class="col-xs-4 col-sm-4 col-md-4 main-top"><a href="backlog_manager"><img src="${pageContext.request.contextPath}/resources/images/index_12.jpg" alt=""/></a></li>
+                <li class="col-xs-4 col-sm-4 col-md-4 main-top"><a href="article_manager"><img src="${pageContext.request.contextPath}/resources/images/index_14.jpg" alt=""/></a></li>
                 <div class="clear"></div>
             </ul>
             <!--快速通道-->
             <!--通知公告-->
-            <h3 style="border:1px solid #d4d1d1;"><a href="getNotices" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>通知公告</a></h3>
-            <ul style="border:1px solid #d4d1d1;min-height:415px;">
-
-                <li class="col-md-12 main-top1">
-                    <a href="notice/detail?id=3">
-                        <p>
-                   <span  class="fl hang" title="鑫联华信息有限公司">
-                     鑫联华信息有限公司
-
+     <h3 style="border:1px solid #d4d1d1;"><a href="getNoticesAdmin" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>通知公告</a></h3>
+       <ul style="border:1px solid #d4d1d1;min-height:415px;">
+          <c:forEach items="${noticelist}" var="notice">
+           <li class="col-md-12 main-top1">
+              <a href="detail?id=${notice.id}">
+                 <p>
+                   <span  class="fl hang" title="${notice.caption}">
+                     ${fn:substring(notice.caption,0,30) }
+	                     <c:if test="${fn:length(notice.caption) > 30 }">
+								...
+						 </c:if>
                    </span>
-                            <span class="fr">2015-11-27 14:50:50</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="notice/detail?id=4">
-                        <p>
-                   <span  class="fl hang" title="鑫联华信息有限公司">
-                     鑫联华信息有限公司
-
-                   </span>
-                            <span class="fr">2015-11-27 14:50:53</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="notice/detail?id=5">
-                        <p>
-                   <span  class="fl hang" title="鑫联华信息有限公司">
-                     鑫联华信息有限公司
-
-                   </span>
-                            <span class="fr">2015-11-27 14:50:56</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="notice/detail?id=7">
-                        <p>
-                   <span  class="fl hang" title="鑫联华信息有限公司">
-                     鑫联华信息有限公司
-
-                   </span>
-                            <span class="fr">2015-11-27 14:51:02</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="notice/detail?id=8">
-                        <p>
-                   <span  class="fl hang" title="鑫联华信息有限公司">
-                     鑫联华信息有限公司
-
-                   </span>
-                            <span class="fr">2015-11-27 14:51:05</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="notice/detail?id=26">
-                        <p>
-                   <span  class="fl hang" title="这是一个测试通告">
-                     这是一个测试通告
-
-                   </span>
-                            <span class="fr">2015-12-02 17:38:52</span>
-                        </p>
-                    </a>
-                </li>
-
-                <div class="clear"></div>
-            </ul>
-            <!--通知公告-->
+                   <span class="fr"><fmt:formatDate value="${notice.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                 </p>
+              </a>
+           </li>
+          </c:forEach>
+         <div class="clear"></div>
+       </ul>
+<!--通知公告-->
             <!--代办公文-->
-            <h3 style="border:1px solid #d4d1d1;"><a href="sendArticle/backlog_manager" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>待办公文</a></h3>
+            <h3 style="border:1px solid #d4d1d1;"><a href="backlog_manager" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>待办公文</a></h3>
             <ul style="border:1px solid #d4d1d1; min-height:210px;">
+            <c:forEach items="${approve}" var="approve">
+           <li class="col-md-12 main-top1">
+              <a >
+                 <p>
+                   <span  class="fl hang" title="${approve.sendArticle.caption}">
+                     ${fn:substring(approve.sendArticle.caption,0,30) }
+	                     <c:if test="${fn:length(approve.sendArticle.caption) > 30 }">
+								...
+						 </c:if>
+                   </span>
+                   <span class="fr">${approve.staffInfo.realname}</span>
+                  </p>
+              </a>
+           </li>
+          </c:forEach>
 
                 <div class="clear"></div>
             </ul>
             <!--代办公文-->
             <!--公式信息-->
-            <h3 style="border:1px solid #d4d1d1;"><a href="getArticleAll" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>公示信息</a></h3>
+            <h3 style="border:1px solid #d4d1d1;"><a href="togetArticleAll" class="btn btn-link"><i><img src="${pageContext.request.contextPath}/resources/images/index_271.jpg"></i>公示信息</a></h3>
             <ul style="border:1px solid #d4d1d1;min-height:210px;">
 
                 <li class="col-md-12 main-top1">
@@ -314,101 +267,20 @@
             <h3 style="border:1px solid #d4d1d1;"><a href="getForums" class="btn btn-link"><i><img src="images/index_271.jpg"></i>职工社区</a></h3>
             <ul style="border:1px solid #d4d1d1; min-height:765px;">
 
+      <c:forEach items="${forum }" var="f">
                 <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=172">
-                        <p style="color:#50afd7">谁开的房间</p>
-                        <span  class="fl hang" title="申达股份">
-	                     申达股份
+                    <a href="detailForum?id=${f.id }">
+                        <p style="color:#50afd7">${f.caption }</p>
+                        <span  class="fl hang" title="${f.content }">
+	                      ${f.content }
 
 	                   </span>
-                        <span class="fr">2015-11-29 14:11:40</span>
+                        <span class="fr"><fmt:formatDate value="${f.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/> </span>
                         </p>
                     </a>
                 </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=176">
-                        <p style="color:#50afd7">没看捐款的</p>
-                        <span  class="fl hang" title="收款的烦恼">
-	                     收款的烦恼
-
-	                   </span>
-                        <span class="fr">2015-11-29 15:41:47</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=178">
-                        <p style="color:#50afd7">fgsw</p>
-                        <span  class="fl hang" title="sdfg">
-	                     sdfg
-
-	                   </span>
-                        <span class="fr">2015-11-30 08:53:05</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=179">
-                        <p style="color:#50afd7">sdf</p>
-                        <span  class="fl hang" title="sdf">
-	                     sdf
-
-	                   </span>
-                        <span class="fr">2015-11-30 08:54:54</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=180">
-                        <p style="color:#50afd7">df</p>
-                        <span  class="fl hang" title="sdf">
-	                     sdf
-
-	                   </span>
-                        <span class="fr">2015-11-30 08:57:13</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=181">
-                        <p style="color:#50afd7">sdf</p>
-                        <span  class="fl hang" title="sdf">
-	                     sdf
-
-	                   </span>
-                        <span class="fr">2015-11-30 09:18:02</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=183">
-                        <p style="color:#50afd7">rtw</p>
-                        <span  class="fl hang" title="wer">
-	                     wer
-
-	                   </span>
-                        <span class="fr">2015-11-30 09:25:10</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="col-md-12 main-top1">
-                    <a href="detailForum?id=184">
-                        <p style="color:#50afd7">df</p>
-                        <span  class="fl hang" title="se">
-	                     se
-
-	                   </span>
-                        <span class="fr">2015-11-30 09:27:51</span>
-                        </p>
-                    </a>
-                </li>
+       </c:forEach>
+                
 
                 <div class="clear"></div>
         </div>

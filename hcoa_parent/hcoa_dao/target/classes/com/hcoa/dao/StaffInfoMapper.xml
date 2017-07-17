@@ -448,12 +448,25 @@
   </select>
   
   
-  <select id="getUserByIds" parameterType="Long" resultMap="BaseResultMap">
-  	select * from staff_info where 
-  	<foreach collection="list" open=" role_id in(" close=")" item="id" separator=",">
+  <select id="getUserByIds" parameterType="Long" resultMap="ResultWithDeptRole">
+  	<include refid="rootsql"></include>
+  	where
+  	<foreach collection="list" open=" a.role_id in(" close=")" item="id" separator=",">
 			#{id}	
   	</foreach>
+  </select>
   
+   <select id="selectStaff" resultMap="ResultWithDeptRole" >
+    	<include refid="rootsql"></include>
+  </select> 
+  <select id="selectStaffByDept" parameterType="long" resultMap="ResultWithDeptRole" >
+    	<include refid="rootsql"></include> where b.id=#{id}
+  </select>
+  <update id="fireUserById" parameterType="long">
+  		update staff_info set status=0 where id=#{id}
+  </update>
+  <select id="searchByRealName" parameterType="string" resultMap="ResultWithDeptRole">
+  		<include refid="rootsql"></include> where login_username like '%${realname}%'
   </select>
   
 </mapper>

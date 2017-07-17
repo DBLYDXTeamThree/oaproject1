@@ -17,7 +17,16 @@ public class SendArticleAttach {
 
     private Long remark;
 
-    public Long getId() {
+    private String CreateByName;
+    public String getCreateByName() {
+		return CreateByName;
+	}
+
+	public void setCreateByName(String createByName) {
+		CreateByName = createByName;
+	}
+
+	public Long getId() {
         return id;
     }
 

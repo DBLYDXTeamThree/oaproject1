@@ -35,7 +35,7 @@ public class BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		//map.put("depts", depts);
 		for(int i=0;i<depts.size();i++){
-			map.put(i+"", depts.get(i).getDepartmentCaption());
+			map.put(depts.get(i).getId()+"", depts.get(i).getDepartmentCaption());
 		}
 		json.setDatas(map);
 		json.setCode(1l);
@@ -58,7 +58,7 @@ public class BaseController {
 		json.setMsg("加载人员列表成功");*/
 		ResponseJson json = new ResponseJson();
 		Map<String, Object> map = baseService.getBuildPersonList(1l);
-		json.setCode(1l);
+		json.setCode(1l); 	
 		json.setDatas(map);
 		json.setMsg("加载人员列表成功");
 		return json;

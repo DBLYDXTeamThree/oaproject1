@@ -343,4 +343,25 @@
   	select * from flow_node where approve_project_id = #{projectId} order by node_num+0
   </select>
   
+   <select id="getOneArt" resultMap="BaseResultMap">
+     select * from flow_node where approve_project_id=1 and node_num=#{nodenum}
+  </select>
+  
+  <resultMap id="FindNode" type="com.hcoa.entity.FlowNode" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="node_num" property="nodeNum" jdbcType="VARCHAR" />
+    <result column="node_caption" property="nodeCaption" jdbcType="VARCHAR" />
+    <result column="node_code" property="nodeCode" jdbcType="VARCHAR" />
+    <result column="tender_method" property="tenderMethod" jdbcType="VARCHAR" />
+    <result column="start_confirm" property="startConfirm" jdbcType="INTEGER" />
+    <result column="approve_or_not" property="approveOrNot" jdbcType="INTEGER" />
+    <result column="sort_num" property="sortNum" jdbcType="BIGINT" />
+    <result column="approve_project_id" property="approveProjectId" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getNode" resultMap="FindNode">
+  select * from flow_node where approve_project_id=#{id} order by node_num+0;
+  </select>
+  
 </mapper>

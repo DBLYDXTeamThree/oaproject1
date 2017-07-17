@@ -45,7 +45,7 @@ $(
 					
 					function (data)
 					{
-						$("#closeBtn").trigger("click");
+						//$("#closeBtn").trigger("click");
 						
 						loadAllRoles();
 					}, 

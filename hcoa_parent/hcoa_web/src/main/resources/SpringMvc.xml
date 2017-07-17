@@ -10,6 +10,8 @@
 
 	<!-- @Controller注解扫描 -->
 	<context:component-scan base-package="com.hcoa.controller"></context:component-scan>
+	
+	<context:property-placeholder location="classpath:resource.properties" />
 
 	<!-- 注解驱动: 替我们显示的配置了最新版的注解的处理器映射器和处理器适配器 -->
 	<!-- <mvc:annotation-driven ></mvc:annotation-driven> -->
@@ -43,13 +45,13 @@
 
 		
 	<!-- 配置拦截器 -->
-<!-- 	<mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
-			拦截请求的路径    要拦截所有必需配置成/**
+			<!-- 拦截请求的路径    要拦截所有必需配置成/** -->
 			<mvc:mapping path="/**"/>
-			指定拦截器的位置
+			<!-- 指定拦截器的位置 -->
 			<bean class="com.hcoa.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 
 </beans>

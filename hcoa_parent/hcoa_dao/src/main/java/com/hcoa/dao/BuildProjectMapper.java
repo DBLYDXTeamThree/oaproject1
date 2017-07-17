@@ -27,4 +27,6 @@ public interface BuildProjectMapper {
     int updateByPrimaryKeySelective(BuildProject record);
 
     int updateByPrimaryKey(BuildProject record);
+
+	String getFlowId(@Param("id")Long id, @Param("flow")String flow);
 }

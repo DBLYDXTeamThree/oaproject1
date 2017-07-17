@@ -193,4 +193,10 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="findByStr" parameterType="string" resultMap="BaseResultMap" >
+    select * from department where department_caption like #{str1}
+  </select>
+    <select id="selectstuffbyid" parameterType="long" resultType="com.hcoa.entity.StaffInfo" >
+    select * from staff_info where department_id=#{id}
+  </select>
 </mapper>

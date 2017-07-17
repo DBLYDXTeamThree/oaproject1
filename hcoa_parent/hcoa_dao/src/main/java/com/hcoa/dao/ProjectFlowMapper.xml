@@ -110,7 +110,7 @@
       #{nodeStatus,jdbcType=VARCHAR}, #{currentApproveLevel,jdbcType=INTEGER}, #{currentCycleTime,jdbcType=INTEGER}, 
       #{publicId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.hcoa.entity.ProjectFlow" >
+  <insert id="insertSelective" parameterType="com.hcoa.entity.ProjectFlow" useGeneratedKeys="true" keyProperty="id">
     insert into project_flow
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -241,4 +241,10 @@
       public_id = #{publicId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getflowId" parameterType="Long" resultType="long">
+    select flow_node_id from project_flow where public_id=#{publicId} and node_status='0'
+  </select>
+  <select id="selectByPublicId" parameterType="Long" resultType="com.hcoa.entity.ProjectFlow">
+    select * from project_flow where public_id=#{publicId} and node_status='0'
+  </select>
 </mapper>

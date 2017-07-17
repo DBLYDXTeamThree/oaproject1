@@ -7,34 +7,34 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/dispatch/From.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/dispatch/jquery.datetimepicker.css">  
-<link rel="stylesheet" type="text/css" href="css/dispatch/demo.css">
-<link rel="stylesheet" type="text/css" href="css/dispatch/from_1.css" >
-<link rel="stylesheet" type="text/css" href="css/dispatch/datePicker.css">
-<link rel="stylesheet" type="text/css" href="css/index.css" >
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-switch.js"></script>
-<script type="text/javascript" src="js/lib.js"></script>
-<script type="text/javascript" src="js/init.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/From.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/jquery.datetimepicker.css">  
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/demo.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/from_1.css" >
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/datePicker.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css" >
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
 
 <!--导航结束-->
 <!--内容开始-->
 <div class="main-right">
 <!--面包屑导航-->
   <ol class="breadcrumb">
-    <li><a href="#">当前位置:</a></li>
-    <li><a href="#">发文管理</a></li>
-    <li class="active">待发公文</li>
+    <li>当前位置:</li>
+    <li>发文管理</li>
+    <li class="active">新建立项</li>
   </ol>
 <!--面包屑导航-->
 <div id="data"></div>
 <!--表单-->
-<form class="form-horizontal registerform" name="form1" method = "post" enctype='multipart/form-data'>
+<form class="form-horizontal registerform" name="form1" method = "post" action="addBuild_project" enctype='multipart/form-data'>
   <!--<ul class="search">
       <li style="float:left; padding-left:90px; padding-bottom:30px;"><button class="btn btn1" data-toggle="modal" data-target="#myModal">申请立项送审</button></li>
       <div class="clear"></div>
@@ -62,13 +62,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="control-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>建筑面积</label>
       <div class="controls">
-          <input type="text" name="build_area" class="input-medium"  style="width:245px;">
+          <input type="text" name="buildArea" class="input-medium"  style="width:245px;">
       </div>
   </div>
   <div class="control-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>层数</label>
       <div class="controls">
-          <input type="text" name="floor_num" class="input-medium"  style="width:245px;">
+          <input type="text" name="floorNum" class="input-medium"  style="width:245px;">
       </div>
   </div>
 
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>环评</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="1" node-name="环评" data-toggle="modal" data-target="#myModal" id="env_checkName">
-      	  <input type="hidden" value="" name="env_check">
+      	  <input type="hidden" value="" name="envCheck">
       </div>
   </div>
 
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>立项</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="2" node-name="立项" data-toggle="modal" data-target="#myModal" id="myModal_2">
-          <input type="hidden" value="" name="build_pro">
+          <input type="hidden" value="" name="buildPro">
       </div>
   </div>
 
@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>节能</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="3" node-name="节能" data-toggle="modal" data-target="#myModal" id="myModal_3">
-          <input type="hidden" value="" name="keep_eng">
+          <input type="hidden" value="" name="keepEng">
       </div>
   </div>
 
@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>可研</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="4" node-name="可研" data-toggle="modal" data-target="#myModal" id="myModal_4">
-          <input type="hidden" value="" name="should_research">
+          <input type="hidden" value="" name="shouldResearch">
       </div>
   </div>
 
@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>初步设计</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="5" node-name="初步设计" data-toggle="modal" data-target="#myModal" id="myModal_5">
-          <input type="hidden" value="" name="first_design">
+          <input type="hidden" value="" name="firstDesign">
       </div>
   </div>
 
@@ -117,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>选址意见书</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="6" node-name="选址意见书" data-toggle="modal" data-target="#myModal" id="myModal_6">
-          <input type="hidden" value="" name="choose_files">
+          <input type="hidden" value="" name="chooseFiles">
       </div>
   </div>
 
@@ -125,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>建设用地规划许可证</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="7" node-name="建设用地规划许可证" data-toggle="modal" data-target="#myModal" id="myModal_7">
-          <input type="hidden" value="" name="area_plan_agree">
+          <input type="hidden" value="" name="areaPlanAgree">
       </div>
   </div>
 
@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>建设用地批准书</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="8" node-name="建设用地批准书" data-toggle="modal" data-target="#myModal" id="myModal_8">
-          <input type="hidden" value="" name="area_agree">
+          <input type="hidden" value="" name="areaAgree">
       </div>
   </div>
 
@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>建设工程规划许可证</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node"  style="width:245px;" node-id="9" node-name="建设工程规划许可证" data-toggle="modal" data-target="#myModal" id="myModal_9">
-          <input type="hidden" value="" name="build_project_agree">
+          <input type="hidden" value="" name="buildProjectAgree">
       </div>
   </div>
 
@@ -149,13 +149,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"><span style="color:red;">&nbsp;</span>施工许可证</label>
       <div class="controls">
           <input type="text" class="input-medium flow-node" style="width:245px;" node-id="10" node-name="施工许可证" data-toggle="modal" data-target="#myModal" id="myModal_10">
-          <input type="hidden" value="" name="kick_off_agree">
+          <input type="hidden" value="" name="kickOffAgree">
       </div>
   </div>
   
   <div class="control-group" style="width: 300px;float: left;" id="butt">
       <div class="controls">
-          <button type="button" class="btn btn-primary" id="savebuild">提交立项</button>
+          <input type="submit" class="btn btn-primary" id="savebuild111" value="提交立项">
       </div>
   </div>
 
@@ -215,11 +215,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div><!-- 模态框结束 -->
 
 
-<script type="text/javascript" src="js/from/Validform_v5.3.2_min.js"></script>
-<script type="text/javascript" src="js/from/passwordStrength-min.js"></script>
-<script type="text/javascript" src="js/from/jquery.datePicker-min.js"></script>
-<script type="text/javascript" src="js/from/jquery.datetimepicker.js"></script>  
-<script type="text/javascript" src="js/from/from_1.js"></script>  
-<script type="text/javascript" src="js/build/build_dispatch.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/passwordStrength-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/jquery.datePicker-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/jquery.datetimepicker.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/from_1.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/build/build_dispatch.js"></script>
 </body>
 </html>

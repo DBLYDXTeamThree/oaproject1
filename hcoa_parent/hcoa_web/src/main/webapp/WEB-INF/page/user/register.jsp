@@ -6,20 +6,20 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/dispatch/From.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/dispatch/jquery.datetimepicker.css">  
-	<link rel="stylesheet" type="text/css" href="css/dispatch/demo.css">
-	<link rel="stylesheet" type="text/css" href="css/dispatch/From_1.css" >
-	<link rel="stylesheet" type="text/css" href="css/dispatch/datePicker.css">
-	<link rel="stylesheet" type="text/css" href="css/index.css" >
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-switch.js"></script>
-	<script type="text/javascript" src="js/lib.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/From.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/jquery.datetimepicker.css">  
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/demo.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/From_1.css" >
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dispatch/datePicker.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css" >
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
   
 <!--导航结束-->
 <!--内容开始-->
@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </ol>
 <!--面包屑导航-->
 <!--表单-->
-<form class="form-horizontal registerform" action="saveUserInfo" name="form1" method = "post" enctype='multipart/form-data'>
+<form class="form-horizontal registerform" action="" name="form1" method = "post" enctype='multipart/form-data'>
 	<input type="hidden" id="userid" name="id" value="${user.id}"/>
   <div class="control-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>真实姓名</label>
@@ -71,21 +71,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="control-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>用户名</label>
       <div class="controls">
-          <input type="text" class="input-medium" name="login_username" value="${user.login_username}"  datatype="s6-18" nullmsg="请输入用户名！" errormsg="用户名至少6个字符,最多18个字符！">
+          <input type="text" class="input-medium" name="loginUsername" value="${user.loginUsername}"  datatype="s6-18" nullmsg="请输入用户名！" errormsg="用户名至少6个字符,最多18个字符！">
           <span class="label">用户名至少6个字符,最多18个字符！</span>
       </div>
   </div>
   <div class="control-group">
       <label class="control-label"> <span style="color:red;">*&nbsp;</span>密码</label>
       <div class="controls">
-          <input type="password" class="input-medium" name="login_pwd" value="${user.login_pwd}" plugin="passwordStrength" datatype="*6-18" nullmsg="请输入密码！" errormsg="密码至少6个字符,最多18个字符！" name="password">
+          <input type="password" class="input-medium" name="loginPwd" value="${user.loginPwd}" plugin="passwordStrength" datatype="*6-18" nullmsg="请输入密码！" errormsg="密码至少6个字符,最多18个字符！" name="password">
           <span class="label">密码至少6个字符,最多18个字符！</span>
       </div>
   </div>
   <div class="control-group">
       <label class="control-label"> <span style="color:red;">*&nbsp;</span>确认密码</label>
       <div class="controls">
-          <input type="password" class="input-medium" value="${user.login_pwd}" recheck="login_pwd" datatype="*6-18" nullmsg="请确认密码！" errormsg="两次输入的密码不一致！">
+          <input type="password" class="input-medium" value="${user.loginPwd}" recheck="loginPwd" datatype="*6-18" nullmsg="请确认密码！" errormsg="两次输入的密码不一致！">
       </div>
   </div>
   <div class="control-group" id="ckMonth">
@@ -100,8 +100,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label class="control-label"> <span style="color:red;">*&nbsp;</span>所在部门</label>
       <div class="controls">
                <div class="btn-group">
-               <input type="hidden" id="dept_id" value="${user.dept.id}"/>
-               <select class="selectpicker" data-style="btn-primary" name="dept.id" id="department" value="${user.dept.id}" style="width: 150px;height: 30px;">
+               <input type="hidden" id="dept_id" value="${user.departmentId}"/>
+               <select class="selectpicker" data-style="btn-primary" name="departmentId" id="department" value="${user.dept.id}" style="width: 150px;height: 30px;">
+               		<%-- <c:forEach items="${depts }" var="dept" varStatus="i">
+						<option value="${dept.id}">${dept.departmentCaption}</option>
+					</c:forEach> --%>
                </select>
                 <span class="label">请选择所在部门</span>
                </div>
@@ -111,8 +114,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <label class="control-label"> <span style="color:red;">*&nbsp;</span>角色</label>
     <div class="controls">
              <div class="btn-group"> 
-             <input type="hidden" id="role_id" value="${user.role.id}"/>
-             <select class="selectpicker" data-style="btn-primary" name="role.id" id="role" value="${user.role.id}" style="width: 150px;height: 30px;">
+             <input type="hidden" id="role_id" value="${user.roleId}"/>
+             <select class="selectpicker" data-style="btn-primary" name="roleId" id="role" value="${user.role.id}" style="width: 150px;height: 30px;">
+             	<c:forEach items="${roleSet }" var="role" varStatus="i">
+						<option value="${role.id}">${role.roleCaption}</option>
+					</c:forEach>
              </select>
               <span class="label">请选择角色</span>
              </div>
@@ -125,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div class="control-group" style="float: left; margin-left:40px;">
       <div class="controls" style=" margin-left:140px;">
-          <a id="back" href="javascript(0)" class="btn btn-primary">返回首页</a>
+          <a id="back" href="<%=basePath%>index" class="btn btn-primary">返回首页</a>
       </div>
   </div>
  </form>
@@ -138,10 +144,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>哈尔滨市交通基础设施投资建设管理有限公司 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：鑫联华</p>
  </div>
 <!--尾部结束-->
-<script type="text/javascript" src="js/from/Validform_v5.3.2_min.js"></script>
-<script type="text/javascript" src="js/from/passwordStrength-min.js"></script>
-<script type="text/javascript" src="js/from/jquery.datePicker-min.js"></script>
-<script type="text/javascript" src="js/from/jquery.datetimepicker.js"></script>  
-<script type="text/javascript" src="js/user/register.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/passwordStrength-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/jquery.datePicker-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/from/jquery.datetimepicker.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/user/register.js"></script>  
 </body>
 </html>

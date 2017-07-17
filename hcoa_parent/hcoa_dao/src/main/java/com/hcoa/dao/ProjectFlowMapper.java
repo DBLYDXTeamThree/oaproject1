@@ -27,4 +27,8 @@ public interface ProjectFlowMapper {
     int updateByPrimaryKeySelective(ProjectFlow record);
 
     int updateByPrimaryKey(ProjectFlow record);
+
+	long getflowId(Long publicId);
+
+	ProjectFlow selectByPublicId(Long publicId);
 }

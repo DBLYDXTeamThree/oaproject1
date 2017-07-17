@@ -42,6 +42,47 @@
       </foreach>
     </where>
   </sql>
+<resultMap id="FindProject" type="com.hcoa.entity.ApproveProject" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="caption" property="caption" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createby" property="createby" jdbcType="BIGINT" />
+    <result column="create_dept" property="createDept" jdbcType="BIGINT" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+    <result column="business_url" property="businessUrl" jdbcType="VARCHAR" />
+    <association property="si" javaType="com.hcoa.entity.StaffInfo">
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    </association>
+    <association property="dept" javaType="com.hcoa.entity.Department">
+    <result column="department_caption" property="departmentCaption" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="getProject" resultMap="FindProject">
+  select * from approve_project
+  </select>
+   <!-- 查询出数据库里的流程信息 -->
+<resultMap id="FindResultMap" type="com.hcoa.entity.ApproveProject" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="caption" property="caption" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="createby" property="createby" jdbcType="BIGINT" />
+    <result column="create_dept" property="createDept" jdbcType="BIGINT" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+    <result column="business_url" property="businessUrl" jdbcType="VARCHAR" />
+    <association property="si" javaType="com.hcoa.entity.StaffInfo">
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    </association>
+    <association property="dept" javaType="com.hcoa.entity.Department">
+    <result column="department_caption" property="departmentCaption" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="getFlow" resultMap="FindResultMap">
+SELECT a.id id,a.caption,a.createtime,b.department_caption,c.realname,a.table_name,a.content from 
+   approve_project a 
+   left join department b on a.createby=b.id 
+   left join staff_info c on a.create_dept=c.id
+  </select>
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >

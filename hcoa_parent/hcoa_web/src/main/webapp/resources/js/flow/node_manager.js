@@ -17,7 +17,7 @@ $(
 		(
 			function ()
 			{
-				var action = "addNode";
+				var action = "addNode?flag="+$("#flagvalue").val();
 				
 				if ($("#node_id").val())
 				{
@@ -33,6 +33,7 @@ $(
 						$("#closeBtn").trigger("click");
 						
 						loadNodes();
+						window.location.reload(true);
 					},
 					
 					formToJson($("form[name='addForm']"))

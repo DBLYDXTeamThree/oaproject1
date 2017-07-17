@@ -22,8 +22,29 @@ public class Approve {
     private String operationStatus;
 
     private String approveSuggestion;
+    //审核人信息
+    private StaffInfo staffInfo;
+    //发文信息
+    private SendArticle sendArticle;
+    
 
-    public Long getId() {
+    public StaffInfo getStaffInfo() {
+		return staffInfo;
+	}
+
+	public void setStaffInfo(StaffInfo staffInfo) {
+		this.staffInfo = staffInfo;
+	}
+
+	public SendArticle getSendArticle() {
+		return sendArticle;
+	}
+
+	public void setSendArticle(SendArticle sendArticle) {
+		this.sendArticle = sendArticle;
+	}
+
+	public Long getId() {
         return id;
     }
 

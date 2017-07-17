@@ -86,6 +86,13 @@
     should_research, first_design, choose_files, area_plan_agree, area_agree, build_project_agree, 
     kick_off_agree, remark, createby, createtime, deliver_approve_flag
   </sql>
+  <select id="getFlowId" resultType="String">
+  select ${flow} from build_project where id=#{id}
+  </select>
+  
+  
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hcoa.entity.BuildProjectExample" >
     select
     <if test="distinct" >

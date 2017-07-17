@@ -28,7 +28,7 @@ var menuList =
 				//新建发文
 				new MenuItem
 				({
-					id: "sendArticle/dispatch",
+					id: "dispatch",
 					
 					text: "新建发文"
 				}),
@@ -36,7 +36,7 @@ var menuList =
 				//发文管理
 				new MenuItem
 				({
-					id: "sendArticle/article_manager_all",
+					id: "article_manager_all",
 					
 					text: "发文管理"
 				})
@@ -47,7 +47,7 @@ var menuList =
 				//新建立项
 				new MenuItem
 				({
-					id: "build/addbuild_project",
+					id: "addbuild_project",
 					
 					text: "新建立项"
 				}),
@@ -63,7 +63,7 @@ var menuList =
 				//待办立项
 				new MenuItem
 				({
-					id: "build/backlog_manager",
+					id: "backlog_manager",
 					
 					text: "待办立项"
 				}),
@@ -71,7 +71,7 @@ var menuList =
 				//已办立项
 				new MenuItem
 				({
-					id: "build/history_manager",
+					id: "history_manager",
 					
 					text: "已办立项"
 				})
@@ -82,7 +82,7 @@ var menuList =
 				//用户注册
 				new MenuItem
 				({
-					id: "user/register",
+					id: "register",
 					
 					text: "用户注册"
 				}),
@@ -90,7 +90,7 @@ var menuList =
 				//人员管理
 				new MenuItem
 				({
-					id: "user/user_manager",
+					id: "user_manager",
 					
 					text: "人员管理"
 				})
@@ -111,7 +111,7 @@ var menuList =
 					//新建发文
 					new MenuItem
 					({
-						id: "sendArticle/dispatch",
+						id: "dispatch",
 						
 						text: "新建发文"
 					}),
@@ -119,7 +119,7 @@ var menuList =
 					//发文管理
 					new MenuItem
 					({
-						id: "sendArticle/article_manager_all",
+						id: "article_manager_all",
 						
 						text: "发文管理"
 					})
@@ -138,7 +138,7 @@ var menuList =
 					//新建立项
 					new MenuItem
 					({
-						id: "build/addbuild_project",
+						id: "addbuild_project",
 						
 						text: "新建立项"
 					}),
@@ -154,7 +154,7 @@ var menuList =
 					//待办立项
 					new MenuItem
 					({
-						id: "build/backlog_manager",
+						id: "backlog_manager",
 						
 						text: "待办立项"
 					}),
@@ -162,7 +162,7 @@ var menuList =
 					//已办立项
 					new MenuItem
 					({
-						id: "build/history_manager",
+						id: "history_manager",
 						
 						text: "已办立项"
 					})
@@ -181,7 +181,7 @@ var menuList =
 					//用户注册
 					new MenuItem
 					({
-						id: "user/register",
+						id: "register",
 						
 						text: "用户注册"
 					}),
@@ -189,7 +189,7 @@ var menuList =
 					//人员管理
 					new MenuItem
 					({
-						id: "user/user_manager",
+						id: "user_manager",
 						
 						text: "人员管理"
 					})
@@ -218,7 +218,7 @@ var menuList =
 			//我的发文
 			new MenuItem
 			({
-				id: "sendArticle/article_manager",
+				id: "article_manager",
 				
 				text: "我的发文"
 			}),
@@ -226,7 +226,7 @@ var menuList =
 			//待办公文
 			new MenuItem
 			({
-				id: "sendArticle/backlog_manager",
+				id: "backlog_manager1",
 				
 				text: "待办公文"
 			}),
@@ -234,7 +234,7 @@ var menuList =
 			//已办公文
 			new MenuItem
 			({
-				id: "sendArticle/history_manager",
+				id: "history_manager1",
 				
 				text: "已办公文"
 			})
@@ -253,7 +253,7 @@ var menuList =
 			//用户管理
 		 	new MenuItem
 		 	({
-		 		id: "user/user_manager",
+		 		id: "user_manager",
 		 		
 		 		text: "用户管理"
 		 	}),
@@ -261,7 +261,7 @@ var menuList =
 		 	//角色管理
 		 	new MenuItem
 		 	({
-		 		id: "role/role_manager",
+		 		id: "role_manager",
 		 		
 		 		text: "角色管理"
 		 	}),
@@ -269,7 +269,7 @@ var menuList =
 		 	//部门管理
 		 	new MenuItem
 		 	({
-		 		id: "dept/dept_manager",
+		 		id: "deptManagement/todeptmanager",
 		 		
 		 		text: "部门管理"
 		 	}),
@@ -285,7 +285,7 @@ var menuList =
 		 	//流程管理
 		 	new MenuItem
 		 	({
-		 		id: "flow/flow_manager",
+		 		id: "flow_manager",
 		 		
 		 		text: "流程管理"
 		 	})/*,

@@ -7,27 +7,27 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/title/Examination1.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/title/Examination1.css">
 <!--** 下面的js不能删除袄是公用的 也不能改袄**-->
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-switch.js"></script>
-<script type="text/javascript" src="js/ajaxupload.js"></script>
-<script type="text/javascript" src="js/lib.js"></script>
-<script type="text/javascript" src="js/init.js"></script>
-<script type="text/javascript" src="js/build/build_project.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ajaxupload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/build/build_project.js"></script>
 
    <!--导航结束-->
 <!--内容开始-->
 <div class="main-right">
 <!--面包屑导航-->
   <ol class="breadcrumb">
-    <li><a href="#">当前位置:</a></li>
-    <li><a href="#">发文管理</a></li>
+    <li>当前位置:</li>
+    <li>发文管理</li>
     <li class="active">发文申请</li>
   </ol>
     <form id="editForm" method="post">
@@ -64,28 +64,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	               	${build_projectlist.area}
 	              </th>
 	            <th>
-	            	${build_projectlist.build_area}
+	            	${build_projectlist.buildArea}
 	            </th>
 	             <th>
-	            	${build_projectlist.floor_num}
+	            	${build_projectlist.floorNum}
 	            </th>
 	            
 	            <th>
-	            	<c:if test="${build_projectlist.deliver_approve_flag == 0}">未送审</c:if>
-	            	<c:if test="${build_projectlist.deliver_approve_flag == 1}">已送审</c:if>
-	            	<c:if test="${build_projectlist.deliver_approve_flag == 2}">处理中</c:if>
-	            	<c:if test="${build_projectlist.deliver_approve_flag == 3}">已通过</c:if>
-	            	<c:if test="${build_projectlist.deliver_approve_flag == 4}">已退回</c:if>
+	            	<c:if test="${build_projectlist.deliverApproveFlag == 0}">未送审</c:if>
+	            	<c:if test="${build_projectlist.deliverApproveFlag == 1}">已送审</c:if>
+	            	<c:if test="${build_projectlist.deliverApproveFlag == 2}">处理中</c:if>
+	            	<c:if test="${build_projectlist.deliverApproveFlag == 3}">已通过</c:if>
+	            	<c:if test="${build_projectlist.deliverApproveFlag == 4}">已退回</c:if>
 	            </th>
 	              
 	              <th><a href='#'  class='editRoles attachBuild' style='color:#666;' data-toggle='modal' data-target='#myModa2'>管理</a></th>
 				 <th>
                   <button class="btn btn-primary detail_build" type="button" >详情</button>&nbsp;
-                  <c:if test="${build_projectlist.deliver_approve_flag == 0}">
+                  <c:if test="${build_projectlist.deliverApproveFlag == 0}">
                   	 <button class='btn btn-primary send' type='button' data-toggle='modal' data-target='#myModa3'>送审</button>
                   </c:if>
                  
-                  <c:if test="${build_projectlist.deliver_approve_flag == 4}">
+                  <c:if test="${build_projectlist.deliverApproveFlag == 4}">
                   	 <button class='btn btn-primary send' type='button' data-toggle='modal' data-target='#myModa3'>重新送审</button>
                   </c:if>
                 </th>
@@ -113,7 +113,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </div>
          <div class="modal-body" style=" max-height: 300px;overflow:auto;">
          	<form action="upload" id="uploadForm" method="post" enctype="multipart/form-data">
-         	
 	         	<ul class="search" style="margin-bottom: 20px;">
 		          <li style="float:left; padding-left:10px;">
 		          	<input type="button" id="button" value="上传附件" style="background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); border: 1px solid #ccc; height:30px;padding: 2px 12px;"/>
@@ -198,6 +197,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $(".table tr:odd").css("background-color","#fff");
       })
       </script>
-<script type="text/javascript" src="js/build/sendbuild_project.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/build/sendbuild_project.js"></script>
 </body>
 </html>

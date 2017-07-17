@@ -5,22 +5,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <%@ include file="../head.jsp"%>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/title/table.css">
-	<link href="css/index.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/ajaxupload.js"></script>
-	<script type="text/javascript" src="js/lib.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/title/table.css">
+	<link href="${pageContext.request.contextPath}/resources/css/index.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ajaxupload.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
  
 <!--导航结束-->
 <!--内容开始-->
 <div class="main-right">
 <ol class="breadcrumb">
-    <li><a href="#">当前位置:</a></li>
-    <li><a href="#">发文管理</a></li>
+    <li>当前位置:</li>
+    <li>发文管理</li>
     <li class="active">待发公文</li>
 </ol>
 <form class="form-inline registerform" action = "saveUserInfo" name="form1" method = "post" enctype='multipart/form-data'style="min-height:360px;">
@@ -83,6 +83,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>哈尔滨市交通基础设施投资建设管理有限公司 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：鑫联华</p>
  </div>
 <!--尾部结束-->
-<script type="text/javascript" src="js/build/history_manager.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/build/history_manager.js"></script>
 </body>
 </html>

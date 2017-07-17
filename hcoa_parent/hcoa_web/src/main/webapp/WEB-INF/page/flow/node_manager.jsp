@@ -1,23 +1,23 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <%@ include file="../head.jsp"%>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<link rel="stylesheet" type="text/css" href="css/title/Examination1.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Examination1.css">
 	<!--** 下面的js不能删除袄是公用的 也不能改袄**-->
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-switch.js"></script>
-	<script type="text/javascript" src="js/lib.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
-
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-switch.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
    <!--导航结束-->
 <!--内容开始-->
 <div class="main-right">
@@ -46,10 +46,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                <th>审批规则定义</th>
 	                <th>操作</th>
 	            </tr>
+	  <c:forEach items="${fn }" var = "m" varStatus="xxx">
+        <c:if test="${xxx.count%2==1 }"><tr style="background-color:#ffffff;"></c:if>
+	    <c:if test="${xxx.count%2==0 }"><tr style="background-color:#eeeeee;"></c:if>
+	                <th><input type="checkbox" name="check" value="${m.id }" id="check"></th>
+	                <th>${m.nodeNum }</th>
+	                <th>${m.nodeCaption }</th>
+	                <th>
+                      <c:if test="${m.remark!=null}">${m.remark}</c:if>
+                            <c:if test="${m.remark==null}">无</c:if>
+                    
+                    </th>
+	                <th>
+	                <a href="rule_manager?flag=${m.id }" id="rulemanager111">审批规则定义</a>
+	              
+	                </th>
+	                <th>
+	                <button class="btn btn-primary editBtn" data-toggle="modal" data-target="#myModal" id="editnode">修改</button>
+	                <input type="hidden" value="${m.id}" id="jid">
+                <input type="hidden" value="${m.nodeNum }" id="nodeNum">
+	                <input type="hidden" value="${m.nodeCaption }" id="nodeCaption">
+	                </th>
+	            </tr>
+	  </c:forEach>         
             </thead>
         </table>
 </form>
-<form id="editRuleForm" method="post">
+<form id="editRuleForm" method="post" name="flag">
 	<input type="hidden" id="nodeId" name="nodeId" value=""/>
 </form>
  <!--表单-->
@@ -66,18 +89,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </h4>
          </div>
   <form class="form-horizontal registerform" name="addForm" method = "post" enctype='multipart/form-data' style="margin-top: 20px;">
-  <input type="hidden" name="project.id" value="${projectId}"/>
+  <input type="hidden" name="project.id" value="1"/>
   <input type="hidden" name="id" id="node_id" value=""/>
+  <input type="hidden" name="approveProjectId" value="${fn[0].approveProjectId}" id="hide"/>
   <div class="control-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>编号</label>
       <div class="controls">
-          <input type="text" id="node_num" name="node_num" class="input-medium">
+          <input type="text" id="node_num" name="nodeNum" class="input-medium">
       </div>
   </div>
   <div class="control-group">
       <label class="control-label"><span style="color:red;">*&nbsp;</span>节点名称</label>
       <div class="controls">
-          <input type="text"id="node_caption" name="node_caption" class="input-medium">
+          <input type="text"id="node_caption" name="nodeCaption" class="input-medium">
       </div>
   </div>
   <div class="control-group">
@@ -88,6 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   </form>
          <div class="modal-footer">
+         <input type="hidden" id="flagvalue" value="${flag }">
             <button type="button" id="closeBtn" class="btn btn-default btn1" 
                data-dismiss="modal">关闭
             </button>
@@ -105,7 +130,125 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>哈尔滨市交通基础设施投资建设管理有限公司 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：鑫联华</p>
  </div>
 <!--尾部结束-->
-<script type="text/javascript" src="js/flow/node_manager.js"></script>
-</body>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/flow/node_manager.js"></script> --%>
+<script type="text/javascript">
+ $(function(){
+	
+	 $("#delBtn").click(function(){
+	        var s=[]; var i=0;
+	        $("#check:checked").each(function(){
+	            s[i++]=$(this).val();
+	        })
+	        $.ajax({
+	            type: "POST",
+	            url: "${pageContext.request.contextPath}/delNode",
+	            data: JSON.stringify({
+	                ids:s
+	            }),
+	            dataType: "JSON",
+	            async: false,
+	            // 设置请求头信息
+	            contentType: 'application/json;charset=utf-8',
+	            success: function (data) {
+	                if (data) {
+	                    //关闭浮动div
+	                    $("#closeBtn").trigger("click");
+	                    window.location.reload()
+	                }
+	                if (data == false) {
+	                    alert("修改失败");
+	                }
+	            },
+	        });
+	 })
+	   $("#addNode").click(function(){
+		   $("#myModalLabel").text("新增节点");
+		   //alert($("#hide").val())
+            $("#node_num").attr("readonly",null);
+            $("#node_caption").attr("readonly",null);
+            $("#node_num").val("");
+            $("#node_caption").val("");
+            $("#subBtn").click(function(){
+                if($("#node_num").val()==""||$("#node_caption").val()=="") {
+                    alert("请输入编号或节点名称");
+                }else{
+                    $.ajax({
+                        type : "POST",
+                        url : "${pageContext.request.contextPath}/addNode",
+                        data : JSON.stringify({
+                            approveProjectId:$("#hide").val(),
+                            nodeNum:$("#node_num").val(),
+                            nodeCaption:$("#node_caption").val(),
+                            remark:$("#remark").val()
+                        }),
+                        dataType : "JSON",
+                        async : false,
+                        // 设置请求头信息
+                        contentType: "application/json;charset=utf-8",
+                        success:function (data) {
+                        	
+                            if(data){
+                                //关闭浮动div
+                                $("#closeBtn").trigger("click");
+                              window.location.reload();
+                            }
+                            else{
+                                alert("编号或节点名称已存在");
+                            }
+                        },
+                    });
+                }
+            })
+        })
+        
+
+
+         $("button[id=editnode]").each(function(){
+        	
+        $(this).click(function(){
+      
+            var id2=$(this).next().val();
+            var nodeNum2=$(this).next().next().val();
+            var nodeCaption2=$(this).next().next().next().val();
+
+
+            $("#myModalLabel").text("修改节点定义");
+            $("#node_num").val(nodeNum2);
+            $("#node_caption").val(nodeCaption2);
+            $("#node_num").attr("readonly","readonly");
+            $("#node_caption").attr("readonly","readonly");
+            $("#subBtn").click(function(){
+                $.ajax({
+                    type : "POST",
+                    url : "${pageContext.request.contextPath}/editNode",
+                    data : JSON.stringify({
+                        id:id2,
+                        nodeNum:nodeNum2,
+                        nodeCaption:nodeCaption2,
+                        remark:$("#remark").val()
+                    }),
+                    dataType : "JSON",
+                    async : false,
+                    // 设置请求头信息
+                    contentType: "application/json;charset=utf-8",
+                    success:function (data) {
+                        if(data){
+                            //关闭浮动div
+                            $("#closeBtn").trigger("click");
+                            window.location.reload()
+                        }
+                        if(data==false){
+                            alert("修改失败");
+                        }
+                    },
+                });
+            })
+        })
+    })
+		
+});
+
+</script>
+</body>                             
 </html>
 

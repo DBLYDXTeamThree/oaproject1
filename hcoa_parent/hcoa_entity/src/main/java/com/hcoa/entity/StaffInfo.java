@@ -2,51 +2,68 @@ package com.hcoa.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class StaffInfo {
-    private Long id;
+	private Long id;
 
-    private String realname;
+	private String realname;
 
-    private String loginUsername;
+	private String deptname;
 
-    private String loginPwd;
+	private String loginUsername;
 
-    private String cellphone;
+	private String loginPwd;
 
-    private Long departmentId;
+	private String cellphone;
 
-    private Long roleId;
+	private Long departmentId;
 
-    private Long approveRuleId;
+	private Long roleId;
 
-    private Date birthday;
+	private Long approveRuleId;
 
-    private String position;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birthday;
 
-    private Date entrytime;
+	private String position;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date entrytime;
 
-    private String isDisplay;
+	private String isDisplay;
 
-    private String sex;
+	private String sex;
 
-    private String status;
+	private String status;
 
-    private String telephone;
+	private String telephone;
 
-    private String telephoneExt;
-    
-    /**
-     * 员工部门
-     */
-    private Department dept;
-    /**
-     * 员工角色
-     */
-    private RoleSet role;
-    
-    private Department department;
-    
-    public Department getDepartment() {
+	private String telephoneExt;
+
+	/**
+	 * 员工部门
+	 */
+	private Department dept;
+	/**
+	 * 员工角色
+	 */
+	private RoleSet role;
+
+	public String getDeptname() {
+		if (dept != null) {
+			return dept.getDepartmentCaption();
+		}
+		return deptname;
+	}
+
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
+
+	private Department department;
+
+	public Department getDepartment() {
 		return department;
 	}
 
@@ -54,9 +71,7 @@ public class StaffInfo {
 		this.department = department;
 	}
 
-    
-    
-    public Department getDept() {
+	public Department getDept() {
 		return dept;
 	}
 
@@ -73,130 +88,130 @@ public class StaffInfo {
 	}
 
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getRealname() {
-        return realname;
-    }
+	public String getRealname() {
+		return realname;
+	}
 
-    public void setRealname(String realname) {
-        this.realname = realname == null ? null : realname.trim();
-    }
+	public void setRealname(String realname) {
+		this.realname = realname == null ? null : realname.trim();
+	}
 
-    public String getLoginUsername() {
-        return loginUsername;
-    }
+	public String getLoginUsername() {
+		return loginUsername;
+	}
 
-    public void setLoginUsername(String loginUsername) {
-        this.loginUsername = loginUsername == null ? null : loginUsername.trim();
-    }
+	public void setLoginUsername(String loginUsername) {
+		this.loginUsername = loginUsername == null ? null : loginUsername.trim();
+	}
 
-    public String getLoginPwd() {
-        return loginPwd;
-    }
+	public String getLoginPwd() {
+		return loginPwd;
+	}
 
-    public void setLoginPwd(String loginPwd) {
-        this.loginPwd = loginPwd == null ? null : loginPwd.trim();
-    }
+	public void setLoginPwd(String loginPwd) {
+		this.loginPwd = loginPwd == null ? null : loginPwd.trim();
+	}
 
-    public String getCellphone() {
-        return cellphone;
-    }
+	public String getCellphone() {
+		return cellphone;
+	}
 
-    public void setCellphone(String cellphone) {
-        this.cellphone = cellphone == null ? null : cellphone.trim();
-    }
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone == null ? null : cellphone.trim();
+	}
 
-    public Long getDepartmentId() {
-        return departmentId;
-    }
+	public Long getDepartmentId() {
+		return departmentId;
+	}
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
+	}
 
-    public Long getRoleId() {
-        return roleId;
-    }
+	public Long getRoleId() {
+		return roleId;
+	}
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 
-    public Long getApproveRuleId() {
-        return approveRuleId;
-    }
+	public Long getApproveRuleId() {
+		return approveRuleId;
+	}
 
-    public void setApproveRuleId(Long approveRuleId) {
-        this.approveRuleId = approveRuleId;
-    }
+	public void setApproveRuleId(Long approveRuleId) {
+		this.approveRuleId = approveRuleId;
+	}
 
-    public Date getBirthday() {
-        return birthday;
-    }
+	public Date getBirthday() {
+		return birthday;
+	}
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
-    public String getPosition() {
-        return position;
-    }
+	public String getPosition() {
+		return position;
+	}
 
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
-    }
+	public void setPosition(String position) {
+		this.position = position == null ? null : position.trim();
+	}
 
-    public Date getEntrytime() {
-        return entrytime;
-    }
+	public Date getEntrytime() {
+		return entrytime;
+	}
 
-    public void setEntrytime(Date entrytime) {
-        this.entrytime = entrytime;
-    }
+	public void setEntrytime(Date entrytime) {
+		this.entrytime = entrytime;
+	}
 
-    public String getIsDisplay() {
-        return isDisplay;
-    }
+	public String getIsDisplay() {
+		return isDisplay;
+	}
 
-    public void setIsDisplay(String isDisplay) {
-        this.isDisplay = isDisplay == null ? null : isDisplay.trim();
-    }
+	public void setIsDisplay(String isDisplay) {
+		this.isDisplay = isDisplay == null ? null : isDisplay.trim();
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
+	public void setSex(String sex) {
+		this.sex = sex == null ? null : sex.trim();
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
+	public void setStatus(String status) {
+		this.status = status == null ? null : status.trim();
+	}
 
-    public String getTelephone() {
-        return telephone;
-    }
+	public String getTelephone() {
+		return telephone;
+	}
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
-    }
+	public void setTelephone(String telephone) {
+		this.telephone = telephone == null ? null : telephone.trim();
+	}
 
-    public String getTelephoneExt() {
-        return telephoneExt;
-    }
+	public String getTelephoneExt() {
+		return telephoneExt;
+	}
 
-    public void setTelephoneExt(String telephoneExt) {
-        this.telephoneExt = telephoneExt == null ? null : telephoneExt.trim();
-    }
+	public void setTelephoneExt(String telephoneExt) {
+		this.telephoneExt = telephoneExt == null ? null : telephoneExt.trim();
+	}
 }

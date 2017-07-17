@@ -27,4 +27,8 @@ public interface SendArticleAttachMapper {
     int updateByPrimaryKeySelective(SendArticleAttach record);
 
     int updateByPrimaryKey(SendArticleAttach record);
+
+	List<SendArticleAttach> selectFire(Long id);
+
+	List<SendArticleAttach> selectByid(Long id);
 }

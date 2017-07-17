@@ -6,33 +6,46 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface FlowNodeMapper {
-    int countByExample(FlowNodeExample example);
+	int countByExample(FlowNodeExample example);
 
-    int deleteByExample(FlowNodeExample example);
+	int deleteByExample(FlowNodeExample example);
 
-    int deleteByPrimaryKey(Long id);
+	int deleteByPrimaryKey(Long id);
 
-    int insert(FlowNode record);
+	int insert(FlowNode record);
 
-    int insertSelective(FlowNode record);
+	int insertSelective(FlowNode record);
 
-    List<FlowNode> selectByExampleWithBLOBs(FlowNodeExample example);
+	List<FlowNode> selectByExampleWithBLOBs(FlowNodeExample example);
 
-    List<FlowNode> selectByExample(FlowNodeExample example);
+	List<FlowNode> selectByExample(FlowNodeExample example);
 
-    FlowNode selectByPrimaryKey(Long id);
+	FlowNode selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") FlowNode record, @Param("example") FlowNodeExample example);
+	int updateByExampleSelective(@Param("record") FlowNode record, @Param("example") FlowNodeExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") FlowNode record, @Param("example") FlowNodeExample example);
+	int updateByExampleWithBLOBs(@Param("record") FlowNode record, @Param("example") FlowNodeExample example);
 
-    int updateByExample(@Param("record") FlowNode record, @Param("example") FlowNodeExample example);
+	int updateByExample(@Param("record") FlowNode record, @Param("example") FlowNodeExample example);
 
-    int updateByPrimaryKeySelective(FlowNode record);
+	int updateByPrimaryKeySelective(FlowNode record);
 
-    int updateByPrimaryKeyWithBLOBs(FlowNode record);
+	int updateByPrimaryKeyWithBLOBs(FlowNode record);
 
-    int updateByPrimaryKey(FlowNode record);
-    
-    List<FlowNode> getFlowNodeByProjectId(Long projuectId);
+	int updateByPrimaryKey(FlowNode record);
+
+	List<FlowNode> getFlowNodeByProjectId(Long projuectId);
+
+	FlowNode getOneArt(String nodenum);
+
+	List<FlowNode> getNode(@Param("id") long id);
+
+	List<FlowNode> addNode();
+
+	void editN(FlowNode fn);
+
+	void delNodes(Long[] ids);
+
+	void updateNode(Long id, String num, String caption, String remark);
+
 }

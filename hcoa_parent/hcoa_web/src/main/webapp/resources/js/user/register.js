@@ -66,18 +66,21 @@ $(
 			{
 				callback: function (form)
 				{
-					var action = "addUser";
+					var action = "saveUserInfo1";
 					
-					var path = "/base/user/user_manager";
+					var path = "/hcoa_web/user_manager";
 					
 					if ($("#userid").val())
 					{
 						action = "updateUser";
 						
-						path = "/base/user/user_manager";
+						path = "/hcoa_web/user_manager";
 					}
 					
-					doSubmit(form, action, path);
+					//doSubmit(form, action, path);
+					$.post(action,$("form[name='form1']").serialize(),function(data){
+						window.location.href = path;
+					})
 					
 					return false;
 				},

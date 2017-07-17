@@ -2,6 +2,8 @@ package com.hcoa.dao;
 
 import com.hcoa.entity.ApproveLevel;
 import com.hcoa.entity.ApproveLevelExample;
+import com.hcoa.entity.FlowNode;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +33,16 @@ public interface ApproveLevelMapper {
     List<Long> getRoleIdByApproveLevelId(Long id);
     
     Long getIdByFlowNodeId(Long id);
+    
+    List<ApproveLevel> getLevel( @Param("flag") long flag);
+    
+    List<ApproveLevel> addRule();
+    
+    void delLevel(Long id);
+    
+    void addGuize(Long id, String name, Integer level); 
+    
+    boolean judgeName(String name);
+    
+    void updateProject(Long id,String name, String table, String content);
 }

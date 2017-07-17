@@ -1,18 +1,128 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/title/table.css">
-	<link href="css/index.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/ajaxupload.js"></script>
-	<script type="text/javascript" src="js/lib.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/title/table.css">
+	<link href="${pageContext.request.contextPath}/resources/css/index.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ajaxupload.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
+ 
+ <script type="text/javascript">
+	$(function(){
+		$("#delBtn").click
+		(
+			function ()
+			{
+				if (confirm("请确认是否要删除这些节点"))
+				{
+					var checkBoxes = $("#content1 :checkbox");
+					
+					var checkBox = null;
+					
+					var idList = [];
+					
+					$.each
+					(
+						checkBoxes,
+						
+						function (i)
+						{
+							checkBox = $(checkBoxes[i]);
+							
+							if (checkBox.prop("checked"))
+							{
+								idList.push(checkBox.parent().parent().data("id"));
+							}
+						}
+					);
+					
+					ajax4Json
+					(
+						"delAttachs",
+						
+						function (data)
+						{
+							if(date=="success")
+								window.location.reload(true)
+						},
+						
+						{idList: idList}
+					);
+				}
+			}
+		);
+		
+		
+		$("a[id='look']").each(function(){
+			$(this).click(function(){
+				loadAttachList($(this).next().val())
+			})
+			
+		})
+		
+	})
+	
+	function loadAttachList(id)
+	{	
+		ajax4Json
+		(
+			"loadAttachList1?id="+id,
+
+			function (data)
+			{
+				var thead = $("#content1").children(":first");
+
+				$("#content1").empty();
+
+				$("#content1").append(thead);
+				
+				var attachList = data["attachList"];
+				
+				var keyList = ["fileName"];
+
+				$.each
+				(
+					attachList,
+
+					function(i)
+					{
+						var attach = attachList[i];
+						
+						var tr = createDataRow(attach, keyList, true)
+						.append
+						(
+							"<th><a class='download' style='color:#666; cursor:pointer;'>下载</a></th>"
+						);
+
+						$("#content1").append(tr);
+					}
+				);
+				
+				$(".download").click
+				(
+					function ()
+					{
+						download("download", {attachid: $(this).parent().parent().data("id")});
+					}
+				);
+				
+				$(".table tr:odd").css("background-color","#fff");
+			}
+			
+			
+		)
+		}
+	
+	
+   </script>
  
 <!--导航结束-->
 <!--内容开始-->
@@ -20,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <ol class="breadcrumb">
     <li><a href="#">当前位置:</a></li>
     <li><a href="#">发文管理</a></li>
-    <li class="active">待发公文</li>
+    <li class="active">我的发文</li>
 </ol>
 
     <form id="editForm" method="post">
@@ -42,6 +152,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                <th>送审状态</th>
 	                <th>送审</th>
 	            </tr>
+	            <c:forEach items="${sa }" var="a" varStatus="s">
+	            <c:if test="${s.count%2==1 }"><tr style="background-color:rgb(255,255,255);"></c:if>
+	            <c:if test="${s.count%2==0 }"><tr style="background-color:#EEEEEE;"></c:if>
+	                <th class="id">${a.id }</th>
+	                <th class="caption">
+	                <c:if test="${a.caption=='' }">无</c:if>
+	                <c:if test="${a.caption!='' }">${a.caption}</c:if>
+	                </th>
+	                <th class="dispatcher">
+	                <c:if test="${a.dispatcherName.realname==null }">无</c:if>
+	                <c:if test="${a.dispatcherName.realname!=null }">${a.dispatcherName.realname}</c:if>
+	                </th>
+	                <th class="unit_sign">
+	                <c:if test="${a.unitSignName.realname==null }">无</c:if>
+	                <c:if test="${a.unitSignName.realname!=null }">${a.unitSignName.realname}</c:if>
+	                </th>
+	                <th class="checker">
+	                <c:if test="${a.checkerName.realname==null }">无</c:if>
+	                <c:if test="${a.checkerName.realname!=null }">${a.checkerName.realname}</c:if>
+	                </th>
+	                <th class="check_article">
+	                <c:if test="${a.checkArticleName.realname==null }">无</c:if>
+	                <c:if test="${a.checkArticleName.realname!=null }">${a.checkArticleName.realname}</c:if>
+	                </th>
+	                <th class="main_dept">${a.department.departmentCaption }</th>
+	                <th class="drafter">
+	                <c:if test="${a.drafter=='' }">无</c:if>
+	                <c:if test="${a.drafter!='' }">${a.drafter}</c:if>
+	                </th>
+	                <th><a href="#" class="attachManager" style="color:#666;" data-toggle="modal" data-target="#myModa2" id="look">管理</a>
+	                <input type="hidden" value="${a.id}">
+	                </th>
+	                <th><a href="editArticle?id=${a.id }" class='btn btn-primary moreinfo' >详情</a></th>
+	                <c:if test="${a.deliverApproveFlag==0 }">
+	                <th class="deliver_approve_flag">未送审</th>
+	                <th><a href="send_art?articleid=${a.id }" class='btn btn-primary send'  >送审</a></th>
+	                </c:if>
+	                <c:if test="${a.deliverApproveFlag==1 }">
+	                <th class="deliver_approve_flag">已送审</th>
+	                <th></th>
+	                </c:if>
+	                <c:if test="${a.deliverApproveFlag==3 }">
+	                <th class="deliver_approve_flag">已通过</th>
+	                <th></th>
+	                </c:if>
+	                <c:if test="${a.deliverApproveFlag==4 }">
+	                <th class="deliver_approve_flag">已退回</th>
+	                <th><a href="resend_art?articleid=${a.id }" class='btn btn-primary send' type='button' >重新送审</a></th>
+	                </c:if>
+	                </tr>
+	            </c:forEach> 
+	            
             </thead>
         </table>
         
@@ -137,6 +299,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>哈尔滨市交通基础设施投资建设管理有限公司 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：鑫联华</p>
  </div>
 <!--尾部结束-->
-<script type="text/javascript" src="js/sendArticle/article_manager.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sendArticle/article_manager.js"></script> --%>
 </body>
 </html>

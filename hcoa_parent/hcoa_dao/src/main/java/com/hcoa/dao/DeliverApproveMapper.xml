@@ -111,7 +111,7 @@
       #{approveProjectId,jdbcType=BIGINT}, #{deliverId,jdbcType=BIGINT}, #{deliveMessage,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{deliverDatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hcoa.entity.DeliverApprove" >
+  <insert id="insertSelective" parameterType="com.hcoa.entity.DeliverApprove" useGeneratedKeys="true" keyProperty="id">
     insert into deliver_approve
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -165,7 +165,7 @@
         #{deliverDatetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
-  </insert>
+  </insert> 
   <select id="countByExample" parameterType="com.hcoa.entity.DeliverApproveExample" resultType="java.lang.Integer" >
     select count(*) from deliver_approve
     <if test="_parameter != null" >

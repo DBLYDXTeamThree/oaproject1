@@ -27,4 +27,14 @@ public interface RoleSetMapper {
     int updateByPrimaryKeySelective(RoleSet record);
 
     int updateByPrimaryKey(RoleSet record);
+    
+     List<RoleSet> getRole();
+
+	List<RoleSet> getRoleSel(Long flag);
+
+	List<RoleSet> searchByRoleCaption(@Param("sea")String sea);
+
+	/*List<RoleSet> getRole(long flag);*/
+
+    
 }

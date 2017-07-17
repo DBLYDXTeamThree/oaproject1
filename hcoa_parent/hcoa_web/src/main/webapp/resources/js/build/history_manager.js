@@ -75,7 +75,7 @@ function loadBuildProjectList(id)
 			var attachList = data["build_project_attachList"];
 			
 			
-			var keyList = ["file_name"];
+			var keyList = ["fileName"];
 
 			$.each
 			(

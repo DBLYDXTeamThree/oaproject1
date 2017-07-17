@@ -21,7 +21,17 @@ public class FlowNode {
 
     private String remark;
 
-    public Long getId() {
+    private Long []ids;
+
+    public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
+	}
+
+	public Long getId() {
         return id;
     }
 

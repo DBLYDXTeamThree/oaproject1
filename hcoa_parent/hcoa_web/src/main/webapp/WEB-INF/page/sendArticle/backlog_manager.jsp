@@ -1,26 +1,94 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ include file="../head.jsp"%>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/title/table.css">
-	<link href="css/index.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/ajaxupload.js"></script>
-	<script type="text/javascript" src="js/lib.js"></script>
-	<script type="text/javascript" src="js/init.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/title/table.css">
+	<link href="${pageContext.request.contextPath}/resources/css/index.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/ajaxupload.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/init.js"></script>
  
+ <script type="text/javascript">
+	$(function(){
+		$("button[id='look']").each(function(){
+			$(this).click(function(){
+				loadAttachList($(this).next().val())
+			})
+			
+		})
+		
+		/* $("#look").click(function(){
+			alert($(this).attr("haha"))
+			loadAttachList($(this).attr("haha"))
+		}) */
+	})
+	
+	function loadAttachList(id)
+	{	
+		ajax4Json
+		(
+			"loadAttachList?articleid="+id,
+
+			function (data)
+			{
+				var thead = $("#content1").children(":first");
+
+				$("#content1").empty();
+
+				$("#content1").append(thead);
+				
+				var attachList = data["attachList"];
+				
+				var keyList = ["fileName"];
+
+				$.each
+				(
+					attachList,
+
+					function(i)
+					{
+						var attach = attachList[i];
+						
+						var tr = createDataRow(attach, keyList, true)
+						.append
+						(
+							"<th><a class='download' style='color:#666; cursor:pointer;'>下载</a></th>"
+						);
+
+						$("#content1").append(tr);
+					}
+				);
+				
+				$(".download").click
+				(
+					function ()
+					{
+						download("download", {attachid: $(this).parent().parent().data("id")});
+					}
+				);
+				
+				$(".table tr:odd").css("background-color","#fff");
+			}
+			
+			
+		)
+		}
+	
+   </script>
 <!--导航结束-->
 <!--内容开始-->
 <div class="main-right">
 <ol class="breadcrumb">
     <li><a href="#">当前位置:</a></li>
     <li><a href="#">发文管理</a></li>
-    <li class="active">待发公文</li>
+    <li class="active">待办公文</li>
 </ol>
 <form class="form-inline registerform" action = "saveUserInfo" name="form1" method = "post" enctype='multipart/form-data'style="min-height:360px;">
         <table class="table table-hover table-bordered">
@@ -34,6 +102,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                <th>附件</th>
 	                <th>操作</th>
 	            </tr>
+	            <c:forEach items="${approve }" var="a" varStatus="s">
+	              <c:if test="${s.count%2==1 }"><tr style="background-color:rgb(255,255,255);"></c:if>
+	            <c:if test="${s.count%2==0 }"><tr style="background-color:#EEEEEE;"></c:if>
+	            	<th>${a.id }</th>
+	                <th>
+	                <c:if test="${a.sendArticle.caption=='' }">无</c:if>
+	                <c:if test="${a.sendArticle.caption!='' }">${a.sendArticle.caption}</c:if>
+	                </th>
+	                <th>${a.staffInfo.realname }</th>
+	                <th>${a.sendArticle.cellphone }</th>
+	                <th>${a.sendArticle.department.departmentCaption }</th>
+	                <th><button class="btn btn-primary attachManager" type="button" data-toggle="modal" data-target="#myModa2"  id="look">查看</button>
+	                 <input type="hidden" value="${a.id}">
+	                </th>
+	                <th>
+	                  <a href="agreeArt?id=${a.id }" class='btn btn-primary successBtn' >同意</a>
+	                  <a href="disagreeArt?id=${a.id }" class='btn btn-primary unsuccessBtn' >不同意</a>
+	                </th>
+	            </tr>
+	            </c:forEach>
             </thead>
         </table>
 </form>
@@ -82,6 +170,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>哈尔滨市交通基础设施投资建设管理有限公司 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：鑫联华</p>
  </div>
 <!--尾部结束-->
-<script type="text/javascript" src="js/sendArticle/backlog_manager.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sendArticle/backlog_manager.js"></script> --%>
 </body>
 </html>

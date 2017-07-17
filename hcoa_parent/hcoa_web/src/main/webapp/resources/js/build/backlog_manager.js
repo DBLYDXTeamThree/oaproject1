@@ -70,7 +70,7 @@ function loadBackLog()
 						
 						function (data)
 						{
-							loadBackLog();
+							window.location.href = "backlog_manager";
 						},
 						
 						{code: 1, tableName: "build_project", projectId: $(this).parent().parent().data("projectId"), id: $(this).parent().parent().data("id")}

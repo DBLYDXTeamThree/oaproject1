@@ -6,6 +6,7 @@
     <result column="role_caption" property="roleCaption" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -35,6 +36,19 @@
       </foreach>
     </where>
   </sql>
+  <resultMap id="FindRole" type="com.hcoa.entity.RoleSet" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_caption" property="roleCaption" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap> 
+    <select id="getRole" resultMap="FindRole">
+    select * from role_set
+  </select> 
+ <select id="getRoleSel" resultMap="BaseResultMap">
+ select * from role_set where id in 
+(select role_id from approve_role where approve_level_id in
+(select id from approve_level where flow_node_id=#{flag}))
+ </select>
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >
@@ -178,4 +192,8 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+   <select id="searchByRoleCaption" parameterType="string" resultMap="BaseResultMap">
+  	select id, role_caption roleCaption, remark from role_set where role_caption like '%${sea}%';
+  </select>
 </mapper>

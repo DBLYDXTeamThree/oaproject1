@@ -338,4 +338,43 @@
       operation_status = #{operationStatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <resultMap id="FindResultMap" type="com.hcoa.entity.Approve" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="deliver_approve_id" property="deliverApproveId" jdbcType="BIGINT" />
+    <result column="public_id" property="publicId" jdbcType="BIGINT" />
+    <result column="approve_project_id" property="approveProjectId" jdbcType="BIGINT" />
+    <result column="approver_id" property="approverId" jdbcType="BIGINT" />
+    <result column="approve_level" property="approveLevel" jdbcType="BIGINT" />
+    <result column="approve_cycle_time" property="approveCycleTime" jdbcType="BIGINT" />
+    <result column="approve_datetime" property="approveDatetime" jdbcType="TIMESTAMP" />
+    <result column="operation_status" property="operationStatus" jdbcType="VARCHAR" />
+     <result column="approve_suggestion" property="approveSuggestion" jdbcType="LONGVARCHAR" />
+     <association property="staffInfo" javaType="com.hcoa.entity.StaffInfo">
+     <result column="realname" property="realname" jdbcType="VARCHAR" />
+     </association>
+     <association property="sendArticle" javaType="com.hcoa.entity.SendArticle">
+     <result column="caption" property="caption" jdbcType="VARCHAR" />
+     <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+     <association property="department" javaType="com.hcoa.entity.Department">
+      <result column="department_caption" property="departmentCaption" jdbcType="VARCHAR" />
+     </association>
+     </association>
+  </resultMap>
+  <select id="selectAll" parameterType="Long" resultMap="FindResultMap">
+    select a.*,b.realname,c.caption,c.cellphone,d.department_caption from 
+    approve a left join staff_info b on a.approver_id=b.id
+    left join send_article c on a.public_id=c.id 
+    left join department d on c.main_dept=d.id
+    where a.approve_project_id=1 and a.approver_id=#{id} 
+    and (operation_status='Finished' or operation_status='NoPass')
+  </select>
+  <select id="selectAllProcessing" parameterType="Long" resultMap="FindResultMap">
+    select a.*,b.realname,c.caption,c.cellphone,d.department_caption from 
+    approve a left join staff_info b on a.approver_id=b.id
+    left join send_article c on a.public_id=c.id 
+    left join department d on c.main_dept=d.id
+    where a.approve_project_id=1 and a.approver_id=#{id} 
+    and operation_status='Processing'
+  </select>
 </mapper>
